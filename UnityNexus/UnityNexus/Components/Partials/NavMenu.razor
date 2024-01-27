@@ -1,0 +1,65 @@
+﻿@using IconSize = Blazorise.IconSize
+
+<Bar Mode="BarMode.VerticalInline"
+    CollapseMode="BarCollapseMode.Small"
+    Breakpoint="Breakpoint.Widescreen"
+    NavigationBreakpoint="Breakpoint.Desktop"
+    ThemeContrast="ThemeContrast.Dark">
+    <BarBrand>
+        <BarItem>
+            <BarLink To="/">
+                <BarIcon IconName="customIcon" />
+                UnityNexus
+            </BarLink>
+        </BarItem>
+    </BarBrand>
+    <BarToggler />
+    <BarMenu>
+        <BarStart>
+            <SmartBarItem Target="Home"
+                          IsDefaultPage="true"
+                          IconName="fa-house" />
+            <SmartBarItem Target="Counter"
+                          IsDefaultPage="false"
+                          IconName="fa-circle-plus" />
+            <SmartBarItem Target="Weather"
+                          IsDefaultPage="false"
+                          IconName="fa-cloud" />
+        </BarStart>
+    </BarMenu>
+</Bar>
+
+@code {
+
+    RenderFragment customIcon =@<img src="images/nexus_logo_small.png" style="width:32px; height: 32px" />;
+}
+
+@* <div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">UnityNexus</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="weather">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            </NavLink>
+        </div>
+    </nav>
+</div> *@

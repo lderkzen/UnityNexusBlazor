@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UnityNexus.Client\UnityNexus.Client.csproj" />
+    <PackageReference Include="Blazorise" Version="1.4.1" />
+    <PackageReference Include="Blazorise.Bootstrap5" Version="1.4.1" />
+    <PackageReference Include="Blazorise.DataGrid" Version="1.4.1" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="vendor\" />
+    <Folder Include="wwwroot\css\bootstrap\" />
+  </ItemGroup>
+
+</Project>

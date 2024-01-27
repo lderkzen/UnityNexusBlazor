@@ -1,0 +1,35 @@
+﻿::deep .bar-brand {
+    height: 128px;
+    width: 128px;
+}
+
+::deep .navbar[data-collapse="small"] .bar-brand {
+    height: 64px;
+    width: 64px;
+}
+
+::deep .bar-section {
+    color: var(--bs-gray-500);
+    padding-left: 1.5rem;
+    min-height: revert;
+}
+
+::deep .navbar[data-collapse="small"] .b-bar-start .bar-section:first-child {
+    display: none;
+}
+
+::deep .navbar[data-collapse="small"] .bar-section {
+    border-bottom: 1px solid var(--bs-light);
+    font-size: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+::deep .navbar[data-collapse="small"] .bar-info {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+::deep .navbar[data-collapse="small"] .bar-info-tokens {
+    display: none !important;
+}

@@ -1,0 +1,109 @@
+﻿@implements IDisposable
+@inject NavigationManager NavigationManager
+
+<div>
+    <BarItem>
+        @if (DropdownItems is null)
+        {
+            @if (_targetAddress is not null)
+            {
+                <BarLink To="@_targetAddress"
+                         Class="@(_isDeepActive ? "active" : string.Empty)">
+                    <BarIcon IconName="@IconName" /> @Target
+                </BarLink>
+            }
+        }
+        else
+        {
+            <BarDropdown>
+                <BarDropdownToggle>
+                    <BarIcon IconName="@IconName" /> @Target
+                </BarDropdownToggle>
+                <BarDropdownMenu>
+                    @foreach (var (location, name) in DropdownItems)
+                    {
+                        <BarDropdownItem To="@location">
+                            @name
+                        </BarDropdownItem>
+                    }
+                </BarDropdownMenu>
+            </BarDropdown>
+        }
+    </BarItem>
+</div>
+
+@code {
+
+    private bool _isDeepActive;
+    private string? _target;
+    private string? _targetAddress;
+    private bool _isDefaultPage;
+    private string? _authorizeWithPolicy;
+
+    [Parameter]
+    public string? Target
+    {
+        get => _target;
+        set
+        {
+            _target = value;
+            ComputeTargetAddress();
+        }
+    }
+
+    [Parameter]
+    public bool IsDefaultPage
+    {
+        get => _isDefaultPage;
+        set
+        {
+            _isDefaultPage = value;
+            ComputeTargetAddress();
+        }
+    }
+
+    [Parameter]
+    public string? IconName { get; set; }
+
+    [Parameter]
+    public List<(string Location, string Name)>? DropdownItems { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+        UpdateNavigationActiveState();
+        return Task.CompletedTask;
+    }
+
+    private void ComputeTargetAddress()
+    {
+        _targetAddress = "/";
+        if (!IsDefaultPage)
+            _targetAddress = _targetAddress + Target?.ToLowerInvariant().Replace(" ", "-");
+    }
+
+    private void UpdateNavigationActiveState()
+    {
+        var uri = new Uri(NavigationManager.Uri);
+        var localPath = uri.LocalPath.ToLowerInvariant();
+
+        _isDeepActive = _targetAddress is not null
+            && !IsDefaultPage
+            && localPath != _targetAddress
+            && localPath.StartsWith(_targetAddress);
+
+        StateHasChanged();
+    }
+
+    private void NavigationManagerOnLocationChanged(object? sender,
+                                                    LocationChangedEventArgs e)
+    {
+        UpdateNavigationActiveState();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
+    }
+
+}
