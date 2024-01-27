@@ -1,6 +1,9 @@
+using Blazored.LocalStorage;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
+using UnityNexus.Client.BLL;
+using UnityNexus.Client.Interfaces;
 using UnityNexus.Components;
 
 namespace UnityNexus
@@ -10,20 +13,7 @@ namespace UnityNexus
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-
-			// Add blazorise to the container.
-			builder.Services
-				.AddBlazorise(options =>
-				{
-					options.Immediate = true;
-				})
-				.AddBootstrap5Providers()
-				.AddFontAwesomeIcons();
-
-            // Add services to the container.
-            builder.Services.AddRazorComponents()
-				.AddInteractiveServerComponents()
-				.AddInteractiveWebAssemblyComponents();
+			AddServices(builder.Services, builder.Configuration);
 
 			var app = builder.Build();
 
@@ -51,5 +41,22 @@ namespace UnityNexus
 
 			app.Run();
 		}
+
+		private static void AddServices(IServiceCollection services,
+										IConfiguration configuration)
+        {
+            // Add blazorise to the container.
+            services.AddBlazorise(options =>
+                {
+                    options.Immediate = true;
+                })
+                .AddBootstrap5Providers()
+                .AddFontAwesomeIcons();
+
+			// Add own components
+            services.AddRazorComponents()
+                .AddInteractiveServerComponents()
+                .AddInteractiveWebAssemblyComponents();
+        }
 	}
 }

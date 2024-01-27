@@ -1,0 +1,64 @@
+﻿.auth-header-text {
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+}
+
+.scan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .scan .fingerprint {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        background: url(images/fingerprint_dark.png) no-repeat;
+        background-size: 300px;
+    }
+
+        .scan .fingerprint::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(images/fingerprint-hou.png) no-repeat;
+            background-size: 300px;
+            animation: animate_fingerprint 4s ease-in-out infinite;
+        }
+
+@keyframes animate_fingerprint {
+    0%,2%,98%,100% {
+        height: 0;
+    }
+
+    48%,52% {
+        height: 100%;
+    }
+}
+
+.scan .fingerprint::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: white;
+    border-radius: 8px;
+    filter: drop-shadow(0 0 10px #e9ecef) drop-shadow(0 0 30px #e9ecef);
+    animation: animate_scanner 4s ease-in-out infinite;
+}
+
+@keyframes animate_scanner {
+    0%,2%,98%,100% {
+        top: 0;
+    }
+
+    48%,52% {
+        top: 100%;
+    }
+}
