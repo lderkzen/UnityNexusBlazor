@@ -1,18 +1,24 @@
 ﻿<Container Position="Position.Relative" Fluid="true" Height="Height.Is100">
-    <Div Position="Position.Absolute.Top.Is50.Translate.MiddleX.Translate.MiddleY">
+    <Div Position="Position.Absolute.Top.Is50.Start.Is50.Translate.Middle">
         <Div Display="Display.Flex.Column">
-            <Image Source="images/nexus_logo_normal.png" Text="UnityNexus Logo" />
+            <Figure Position="Position.Relative.Start.Is50.Translate.MiddleX" Size="FigureSize.Is512x512" Padding="Padding.Is2.FromBottom">
+                <FigureImage Source="images/nexus_logo_normal.png" Text="UnityNexus Logo" Class="opacity-75" />
+            </Figure>
             <Card>
-                <CardBody>
+                <CardBody Padding="Padding.Is2">
                     <CardTitle TextAlignment="TextAlignment.Center" TextWeight="TextWeight.Bold" Size="2">
-                        Login
+                        Welcome to UnityNexus
                     </CardTitle>
-                    <CardText TextAlignment="TextAlignment.Center">
-                        UnityNexus is a custom developed tool handling applications for all of Hand of Unity's chapters and groups.
-                    </CardText>
-                    <Button Color="Color.Primary">
+                    <CardText Flex="Flex.Column.AlignItems.Center" TextAlignment="TextAlignment.Center" Padding="Padding.Is2.OnY">
+                        <Div Padding="Padding.Is2.FromBottom">
+                            UnityNexus is a custom developed tool handling applications for all of Hand of Unity's chapters and groups.
+                        </Div>
                         <Login />
-                    </Button>
+                    </CardText>
+                    <CardFooter Flex="Flex.JustifyContent.Around">
+                        <a href="/privacy" class="text-reset">Privacy</a>
+                        <a href="/legal-notice" class="text-reset">Legal Notice</a>
+                    </CardFooter>
                 </CardBody>
             </Card>
         </Div>

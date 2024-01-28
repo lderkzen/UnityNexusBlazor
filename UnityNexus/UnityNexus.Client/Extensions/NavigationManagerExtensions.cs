@@ -2,9 +2,9 @@
 
 namespace UnityNexus.Client.Extensions
 {
-    internal static class NavigationManagerExtensions
+    public static class NavigationManagerExtensions
     {
-        internal static string GetHostName(this NavigationManager navigationManager)
+        public static string GetHostName(this NavigationManager navigationManager)
         {
             return new Uri(navigationManager.BaseUri).Host;
         }

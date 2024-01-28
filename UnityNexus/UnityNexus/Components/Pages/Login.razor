@@ -1,19 +1,20 @@
 ﻿@implements IDisposable
+@rendermode renderMode
 
-<div>
-    <Button Block
-            Disabled="@_requiresCookieConsent"
-            Clicked="BeginSignIn"
-            Class="discord-button">
-         <i class="fa-brands fa-discord"></i> Log in with Discord
-     </Button>
- </div>
+<Button Disabled="@_requiresCookieConsent"
+        Clicked="BeginSignIn"
+        Size="Size.Large"
+        Class="btn-discord"
+        TextColor="TextColor.White">
+    <i class="fab fa-discord"></i> Log in with Discord
+ </Button>
 
- @code
- {
+@code {
+    static IComponentRenderMode renderMode = new InteractiveServerRenderMode(prerender: false);
+
     private bool _requiresCookieConsent = true;
 
-    @* [Inject] private ICookiePolicyService CookiePolicyService { get; set; }
+    [Inject] private ICookiePolicyService CookiePolicyService { get; set; }
 
     [Inject] private NavigationManager NavigationManager { get; set; }
 
@@ -22,7 +23,7 @@
         CookiePolicyService.AcceptedCookiePolicy += AcceptedCookiePolicy;
         _requiresCookieConsent = await CookiePolicyService.CheckIfCookieConsentIsRequiredAsync();
         StateHasChanged();
-    } *@
+    }
 
     private void BeginSignIn()
     {
@@ -44,6 +45,6 @@
 
     void IDisposable.Dispose()
     {
-        @* CookiePolicyService.AcceptedCookiePolicy -= AcceptedCookiePolicy; *@
+        CookiePolicyService.AcceptedCookiePolicy -= AcceptedCookiePolicy;
     }
 }

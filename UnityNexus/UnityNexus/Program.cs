@@ -1,4 +1,4 @@
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
@@ -45,7 +45,14 @@ namespace UnityNexus
 		private static void AddServices(IServiceCollection services,
 										IConfiguration configuration)
         {
-            // Add blazorise to the container.
+
+            // Add external services
+            services.AddBlazoredLocalStorage();
+
+            // Add custom services
+            services.AddScoped<ICookiePolicyService, CookiePolicyService>();
+
+            // Add Blazorise components
             services.AddBlazorise(options =>
                 {
                     options.Immediate = true;

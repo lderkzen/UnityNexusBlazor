@@ -129,6 +129,7 @@
 }
 
 @code {
+    static IComponentRenderMode renderMode = new InteractiveServerRenderMode(prerender: false);
 
     private Modal? _cookieConsentDialog;
 
@@ -170,8 +171,4 @@
         StateHasChanged();
     }
 
-}
-
-@code {
-    static IComponentRenderMode renderMode = new InteractiveWebAssemblyRenderMode(false);
 }

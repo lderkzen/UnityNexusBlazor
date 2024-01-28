@@ -87,3 +87,14 @@
     color: #ffffff;
     font-weight: bold;
 }
+
+/**** Temporary css for all WebAssembly Components as .razor.css files are not compiling */
+        
+
+    .btn-discord {
+        background-color: #5865F2;
+    }
+
+        .btn-discord:hover {
+            background-color: #4D59D6;
+        }

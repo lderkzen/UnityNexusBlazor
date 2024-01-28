@@ -2,8 +2,8 @@
 @import "vendor/bootstrap/scss/variables";
 @import "vendor/bootstrap/scss/mixins";
 
-/* Apply custom theme only when body contains "dark" class, also specifically target .modal as the body's root values get overwritten by .modal.fade.show otherwise */
-.dark, .dark .modal {
+/* Apply custom theme only when body contains "dark" class, also specifically target .modal and .card as the values are overwritten in bootstrap 5.2.3 */
+.dark, .dark .modal, .dark .card {
 
     $enable-gradients: false;
 
@@ -32,8 +32,10 @@
     /* Set background color and contrasting text color */
     --#{$variable-prefix}body-color: #{$body-color};
     --#{$variable-prefix}modal-color: #{$body-color};
+    --#{$variable-prefix}card-color: #{$body-color};
     --#{$variable-prefix}body-bg: #{$body-bg};
     --#{$variable-prefix}modal-bg: #{$body-bg};
+    --#{$variable-prefix}card-bg: #{$body-bg};
 
     /* Other customizations */
     $border-radius: 0.5rem;
@@ -42,6 +44,10 @@
     --#{$variable-prefix}modal-header-border-color: #{$border-color};
     --#{$variable-prefix}modal-content-border-color: #{$border-color};
     --#{$variable-prefix}modal-footer-border-color: #{$border-color};
+    --#{$variable-prefix}card-border-color: #{$border-color};
+
+    /* Yep, same thing goes for border radius */
+    --#{$variable-prefix}card-border-radius: #{$border-radius};
 }
 
 @import "vendor/bootstrap/scss/bootstrap";
