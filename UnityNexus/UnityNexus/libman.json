@@ -3,8 +3,9 @@
   "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "bootstrap@5.2.3",
-      "destination": "vendor/bootstrap/"
+      "provider": "jsdelivr",
+      "library": "bootstrap@5.3.2",
+      "destination": "vendor/bootstrap"
     }
   ]
 }

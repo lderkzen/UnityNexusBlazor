@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus", "UnityNexus\UnityNexus\UnityNexus.csproj", "{48B4429D-05DA-4505-86A4-FBA85DAE2E51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus", "UnityNexus\UnityNexus\UnityNexus.csproj", "{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Client", "UnityNexus\UnityNexus.Client\UnityNexus.Client.csproj", "{120AC5B2-7920-4235-8168-BC0F5620AEB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Client", "UnityNexus\UnityNexus.Client\UnityNexus.Client.csproj", "{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandOfUnity.Database", "HandOfUnity.Database\HandOfUnity.Database.csproj", "{CD7643B4-5B8E-4396-BFEF-FD17137D2397}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Shared", "UnityNexus.Shared\UnityNexus.Shared.csproj", "{D59A247A-3F77-40CE-9E62-F1BFC5331189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Database", "UnityNexus.Database\UnityNexus.Database.csproj", "{54998AFE-9799-4F2E-BC45-6A07904F42A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,23 +17,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{48B4429D-05DA-4505-86A4-FBA85DAE2E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48B4429D-05DA-4505-86A4-FBA85DAE2E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48B4429D-05DA-4505-86A4-FBA85DAE2E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48B4429D-05DA-4505-86A4-FBA85DAE2E51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{120AC5B2-7920-4235-8168-BC0F5620AEB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{120AC5B2-7920-4235-8168-BC0F5620AEB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{120AC5B2-7920-4235-8168-BC0F5620AEB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{120AC5B2-7920-4235-8168-BC0F5620AEB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD7643B4-5B8E-4396-BFEF-FD17137D2397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD7643B4-5B8E-4396-BFEF-FD17137D2397}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD7643B4-5B8E-4396-BFEF-FD17137D2397}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD7643B4-5B8E-4396-BFEF-FD17137D2397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59A247A-3F77-40CE-9E62-F1BFC5331189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59A247A-3F77-40CE-9E62-F1BFC5331189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59A247A-3F77-40CE-9E62-F1BFC5331189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59A247A-3F77-40CE-9E62-F1BFC5331189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54998AFE-9799-4F2E-BC45-6A07904F42A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54998AFE-9799-4F2E-BC45-6A07904F42A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54998AFE-9799-4F2E-BC45-6A07904F42A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54998AFE-9799-4F2E-BC45-6A07904F42A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {EFBC5A8A-B37A-4BD2-BE88-6B5F72CA1D43}
+		SolutionGuid = {F6FDAD55-7C23-4841-BA79-FB094295E571}
 	EndGlobalSection
 EndGlobal
