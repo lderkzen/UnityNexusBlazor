@@ -2,18 +2,15 @@
 
 namespace UnityNexus.Shared.Entities
 {
-    public class DiscordUser
+    public class DiscordUser : KeyedEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         public required ulong DiscordId { get; set; }
 
         public required string Username { get; set; }
 
         public required string DisplayName { get; set; }
 
-        [DefaultValue(NotificationFlag.Unconfigured)]
+        [DefaultValue((byte)NotificationFlag.Unconfigured)]
         public required NotificationFlag NotificationFlagSum { get; set; }
 
         public ICollection<DiscordRole> Roles { get; } = [];

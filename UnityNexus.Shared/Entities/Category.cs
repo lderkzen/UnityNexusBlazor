@@ -1,10 +1,7 @@
 ﻿namespace UnityNexus.Shared.Entities
 {
-    public class Category
+    public class Category : KeyedEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         public required string Name { get; set; }
 
         public required byte Position { get; set; }

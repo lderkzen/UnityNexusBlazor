@@ -7,6 +7,7 @@ global using System.Text;
 global using System.Threading.Tasks;
 global using UnityNexus.Shared.BLL;
 global using UnityNexus.Shared.Entities;
+global using UnityNexus.Shared.Entities.Abstract;
 global using UnityNexus.Shared.Enums;
 global using UnityNexus.Shared.Interfaces;
 global using UnityNexus.Shared.Models;

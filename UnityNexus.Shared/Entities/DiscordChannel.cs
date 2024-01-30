@@ -2,14 +2,11 @@
 
 namespace UnityNexus.Shared.Entities
 {
-    public class DiscordChannel
+    public class DiscordChannel : KeyedEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         public required ulong DiscordId { get; set; }
 
-        [DefaultValue(DiscordChannelType.Unknown)]
+        [DefaultValue((byte)DiscordChannelType.Unknown)]
         public required DiscordChannelType Type { get; set; }
 
         public required string Name { get; set; }
