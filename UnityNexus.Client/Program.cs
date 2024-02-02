@@ -2,13 +2,12 @@ using Blazored.LocalStorage;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace UnityNexus.Client
 {
     public partial class Program
     {
-        public static string DefaultHttpClientName = "DefaultHttp";
+        public const string DefaultHttpClientName = "DefaultHttp";
 
         private const string AnonymousClientName = "Anonymous";
 
@@ -37,12 +36,13 @@ namespace UnityNexus.Client
         {
             // External dependencies
             services.AddOidcAuthentication(options => {
-                configuration.Bind("Oidc", options);
-                Console.WriteLine($"Base Address: '{baseAddress}'");
-                options.ProviderOptions.PostLogoutRedirectUri = baseAddress;
-                options.ProviderOptions.AdditionalProviderParameters.Add("kc_idp_hint", "discord");
-            })
-            .AddAccountClaimsPrincipalFactory;
+                    configuration.Bind("Oidc", options);
+                    Console.WriteLine($"Base Address: '{baseAddress}'");
+                    options.ProviderOptions.PostLogoutRedirectUri = baseAddress;
+                    options.ProviderOptions.AdditionalProviderParameters.Add("kc_idp_hint", "discord");
+                })
+                .AddAccountClaimsPrincipalFactory<KeycloakUserFactory>();
+            services.AddAuthorizationCore(options => options.AddSharedPolicies(typeof(Policies)));
 
             services.AddBlazorise(options =>
                 {

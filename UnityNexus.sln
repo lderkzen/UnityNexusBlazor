@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityNexus", "UnityNexus\UnityNexus\UnityNexus.csproj", "{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityNexus", "UnityNexus\UnityNexus.csproj", "{9AC234C1-1DCD-4A9E-9141-CAC01E299AAB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityNexus.Client", "UnityNexus\UnityNexus.Client\UnityNexus.Client.csproj", "{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityNexus.Client", "UnityNexus.Client\UnityNexus.Client.csproj", "{02AE1DB2-BC32-43EA-86D1-8C3D56BEC0ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityNexus.Shared", "UnityNexus.Shared\UnityNexus.Shared.csproj", "{D59A247A-3F77-40CE-9E62-F1BFC5331189}"
 EndProject
