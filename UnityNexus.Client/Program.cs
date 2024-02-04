@@ -2,6 +2,8 @@ using Blazored.LocalStorage;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
+using Polly.Extensions.Http;
+using Polly;
 
 namespace UnityNexus.Client
 {
@@ -15,6 +17,7 @@ namespace UnityNexus.Client
         {
             Console.WriteLine("Starting Application...");
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            AddHttpClients(builder);
 
             AddHttpClients(builder);
             AddServices(builder.Services, builder.Configuration, builder.HostEnvironment.BaseAddress);
@@ -26,6 +29,27 @@ namespace UnityNexus.Client
 
         private static void AddHttpClients(WebAssemblyHostBuilder builder)
         {
+            builder.Services.AddHttpClient(
+                DefaultHttpClientName,
+                options => options.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            )
+            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>()
+            .AddPolicyHandler(GetRetryPolicy());
+            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultHttpClientName));
+
+            builder.Services
+               .AddHttpClient(AnonymousClientName,
+                              options => options.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+               .AddPolicyHandler(GetRetryPolicy());
+
+            IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+            {
+                return HttpPolicyExtensions.HandleTransientHttpError()
+                    .WaitAndRetryAsync(
+                        6,
+                        retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+                    );
+            }
         }
 
         private static void AddServices(
@@ -54,6 +78,13 @@ namespace UnityNexus.Client
 
             // Custom
             services.AddScoped<ICookiePolicyService, CookiePolicyService>();
+
+            AddRuntimeCaches(services);
+        }
+
+        private static void AddRuntimeCaches(IServiceCollection services)
+        {
+            services.AddScoped<IDiscordUserCache, DiscordUserCache>();
         }
     }
 }

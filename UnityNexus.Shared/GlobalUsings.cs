@@ -5,6 +5,7 @@ global using System.ComponentModel.DataAnnotations.Schema;
 global using System.Linq;
 global using System.Reflection;
 global using System.Text;
+global using System.Text.Json;
 global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Authorization;
 global using UnityNexus.Shared.Auth;
