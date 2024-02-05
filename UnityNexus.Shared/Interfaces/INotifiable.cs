@@ -1,8 +1,8 @@
 ﻿namespace UnityNexus.Shared.Interfaces
 {
-    public interface INotifiable<TIdentifier>
+    public interface INotifiable
     {
-        public TIdentifier Identifier { get; }
+        public string Identifier { get; }
 
         public bool ShouldIdentify { get; }
     }
