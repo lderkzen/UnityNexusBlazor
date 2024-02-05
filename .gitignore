@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # Ignore vendor folder
 UnityNexus/UnityNexus/vendor/*
+/UnityNexus.Client/vendor/bootstrap
