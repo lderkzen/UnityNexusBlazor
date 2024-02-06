@@ -398,5 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Ignore vendor folder
-UnityNexus/UnityNexus/vendor/*
-/UnityNexus.Client/vendor/bootstrap
+UnityNexus/vendor/*
+
+# Ignore local config
+.config/*
