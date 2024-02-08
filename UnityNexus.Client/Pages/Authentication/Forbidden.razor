@@ -1,0 +1,43 @@
+@page "/forbidden"
+@page "/forbidden/{reason}"
+
+<PageTitle>Forbidden | UnityNexus</PageTitle>
+
+<h1>
+    Forbidden
+</h1>
+
+@if (string.IsNullOrEmpty(_reason))
+{
+    <h3>
+        You're not supposed to be here.
+    </h3>
+}
+else 
+{
+    <Alert Color="Color.Warning"
+        Visible="true"
+        Dismisable="false">
+        @_reason
+    </Alert>
+}
+
+@code {
+    private string? _reason;
+
+    [Parameter]
+    public string? Reason {
+        get => _reason;
+        set {
+            if (string.IsNullOrEmpty(value)) {
+                _reason = string.Empty;
+            } else {
+                try {
+                    _reason = Encoding.UTF8.GetString(Convert.FromBase64String(value));
+                } catch {
+                    _reason = "Invalid parameter.";
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,18 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
+<Layout Sider>
+    <LayoutSider>
+        <LayoutSiderContent>
+            <NavMenu />
+        </LayoutSiderContent>
+    </LayoutSider>
+    <Layout>
+        <LayoutContent Padding="Padding.Is4.OnX.Is2.OnY">
+            @Body
+        </LayoutContent>
+    </Layout>
+</Layout>
+@* <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -14,7 +26,7 @@
             @Body
         </article>
     </main>
-</div>
+</div> *@
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.
