@@ -1,0 +1,59 @@
+<Container Fluid="true">
+    @if (_isAuthenticated)
+    {
+        <Row Margin="Margin.Is3.FromTop">
+            <Column ColumnSize="ColumnSize.IsAuto" Margin="Margin.IsAuto.OnX">
+                <h1>
+                    <Icon Name="NotAuthorizedIcon" class="text-danger" />
+                </h1>
+            </Column>
+        </Row>
+        <Row Margin="Margin.Is3.FromTop">
+            <Column ColumnSize="ColumnSize.IsAuto" Margin="Margin.IsAuto.OnX">
+                <h2>You're not authorized to access this page.</h2>
+            </Column>
+        </Row>
+    }
+    else
+    {
+        <Row Margin="Margin.Is3.FromTop">
+            <Column ColumnSize="ColumnSize.IsAuto" Margin="Margin.IsAuto.OnX">
+                <h1>
+                    <Icon Name="NotAuthenticatedIcon" class="text-danger" />
+                </h1>
+            </Column>
+        </Row>
+        <Row Margin="Margin.Is3.FromTop">
+            <Column ColumnSize="ColumnSize.IsAuto" Margin="Margin.IsAuto.OnX">
+                <h2>You're signed out.</h2>
+            </Column>
+        </Row>
+        <Row Margin="Margin.Is3.FromTop">
+            <Column ColumnSize="ColumnSize.IsAuto" Margin="Margin.IsAuto.OnX">
+                <p>To continue, please sign in.</p>
+            </Column>
+        </Row>
+    }
+    </Container>
+
+@code {
+    #nullable enable
+
+    private const string NotAuthenticatedIcon = "fa-user-slash";
+    private const string NotAuthorizedIcon = "fa-user-lock";
+
+    private bool _isAuthenticated;
+
+    [CascadingParameter]
+    public Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine($"{nameof(NotAuthorizedForPage)}.{nameof(OnInitializedAsync)}");
+        if (AuthenticationState is null)
+            throw new InvalidOperationException($"{nameof(AuthenticationState)} is not set.");
+        var authenticationState = await AuthenticationState;
+        _isAuthenticated = authenticationState?.User?.Identity?.IsAuthenticated ?? false;
+    }
+
+}

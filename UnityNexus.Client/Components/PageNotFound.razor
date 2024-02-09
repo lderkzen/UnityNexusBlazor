@@ -1,0 +1,18 @@
+<Container Fluid="true">
+    <Row Margin="Margin.Is3.FromTop">
+        <Column ColumnSize="ColumnSize.IsAuto" class="mx-auto">
+            <h1>
+                <Icon Name="NotFoundIcon" class="text-warning" />
+            </h1>
+        </Column>
+    </Row>
+    <Row Margin="Margin.Is3.FromTop">
+        <Column ColumnSize="ColumnSize.IsAuto" class="mx-auto">
+            <h2>404 - There's nothing at this address.</h2>
+        </Column>
+    </Row>
+</Container>
+
+@code {
+    private const string NotFoundIcon = "fa-ghost";
+}

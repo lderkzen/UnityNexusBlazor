@@ -1,0 +1,45 @@
+@implements IDisposable
+@inject NavigationManager NavigationManager
+@inject ICookiePolicyService CookiePolicyService
+
+<Div>
+    <Button Block Disabled="@_requiresCookieConsent" Clicked="BeginSignIn" Class="discord-button">
+        <i class="fa-brands fa-discord"></i>Log in with Discord
+    </Button>
+</Div>
+
+@code {
+    private bool _requiresCookieConsent = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        CookiePolicyService.AcceptedCookiePolicy += AcceptedCookiePolicy;
+        _requiresCookieConsent = await CookiePolicyService.CheckIfCookieConsentIsRequiredAsync();
+        StateHasChanged();
+    }
+
+    private void BeginSignIn()
+    {
+        var options = new InteractiveRequestOptions
+            {
+                Interaction = InteractionType.SignIn,
+                ReturnUrl = NavigationManager.Uri
+            };
+        options.TryAddAdditionalParameter("prompt", "none");
+        NavigationManager.NavigateToLogin("authentication/login", options);
+    }
+
+    private void AcceptedCookiePolicy(
+        object? sender,
+        EventArgs e
+    )
+    {
+        _requiresCookieConsent = false;
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        CookiePolicyService.AcceptedCookiePolicy -= AcceptedCookiePolicy;
+    }
+}
