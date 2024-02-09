@@ -1,0 +1,22 @@
+@page "/admin/groups/manage"
+
+<Row>
+    <Column>
+        <Card Margin="Margin.Is4.OnY">
+            <CardBody>
+                <DataGrid TItem="Group">
+
+                </DataGrid>
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
+
+@code {
+    private IEnumerable<Group> _data;
+
+    private async Task<IEnumerable<Group>> RefreshDataAsync()
+    {
+
+    }
+}
