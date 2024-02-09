@@ -5,9 +5,9 @@
 @if (_requiresCookieConsent)
 {
     <Modal @ref="_cookieConsentDialog" Closed="@SetConsentCookieAsync">
-        <ModalContent Centered="true">
-            <ModalHeader>
-                @if (ShowDetails)
+    <ModalContent Size="ModalSize.ExtraLarge" Centered="true">
+        <ModalHeader>
+            @if (ShowDetails)
                 {
                     <ModalTitle>Cookie Policy of @NavigationManager.GetHostName()</ModalTitle>
                     <CloseButton Clicked="@(() => ShowDetails = false)" />
@@ -97,11 +97,11 @@
                         <a href="https://support.microsoft.com/en-us/help/4027947/windows-delete-cookies">Microsoft Edge</a>.
                     </p>
                     <p>
-                        With regard to Cookies installed by third parties,
-                        Users can manage their preferences and withdrawal of their consent by clicking the related opt-out link
-                        (if provided),
-                        by using the means provided in the third party's privacy policy, or by contacting the third party.
-                    </p>
+                With regard to Cookies installed by third parties,
+                Users can manage their preferences and withdrawal of their consent by clicking the related opt-out link
+                (if provided),
+                by using the means provided in the third party's privacy policy, or by contacting the third party.
+            </p>
                 }
                 else
                 {
@@ -111,9 +111,9 @@
                         the purpose illustrated in the cookie policy.
                     </p>
                     <p>
-                        You accept the use of cookies by closing or dismissing this notice. Read the full <a
-                            href="/privacy/?ncc=true" target="_blank" rel="noopener noreferrer">privacy policy here</a>.
-                    </p>
+                You accept the use of cookies by closing or dismissing this notice. Read the full <a
+                    href="/privacy/?ncc=true" target="_blank" rel="noopener noreferrer">privacy policy here</a>.
+            </p>
                 }
             </ModalBody>
             <ModalFooter>
