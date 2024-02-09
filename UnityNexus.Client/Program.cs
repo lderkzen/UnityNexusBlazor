@@ -52,32 +52,40 @@ namespace UnityNexus.Client
             }
         }
 
-        private static void AddServices(
+        public static void AddCommonServices(
             IServiceCollection services,
-            IConfiguration configuration,
-            string baseAddress
+            IConfiguration configuration
         )
         {
-            // External dependencies
-            services.AddOidcAuthentication(options => {
-                    configuration.Bind("Oidc", options);
-                    Console.WriteLine($"Base Address: '{baseAddress}'");
-                    options.ProviderOptions.PostLogoutRedirectUri = baseAddress;
-                    options.ProviderOptions.AdditionalProviderParameters.Add("kc_idp_hint", "discord");
-                })
-                .AddAccountClaimsPrincipalFactory<KeycloakUserFactory>();
-            services.AddAuthorizationCore(options => options.AddSharedPolicies(typeof(Policies)));
-
             services.AddBlazorise(options =>
                 {
                     options.Immediate = true;
                 })
                 .AddBootstrap5Providers()
                 .AddFontAwesomeIcons();
-            services.AddBlazoredLocalStorage();
 
-            // Custom
+            services.AddBlazoredLocalStorage();
             services.AddScoped<ICookiePolicyService, CookiePolicyService>();
+        }
+
+        private static void AddServices(
+            IServiceCollection services,
+            IConfiguration configuration,
+            string baseAddress
+        )
+        {
+            AddCommonServices(services, configuration);
+
+            // External dependencies
+            services.AddOidcAuthentication(options =>
+            {
+                configuration.Bind("Oidc", options);
+                Console.WriteLine($"Base Address: '{baseAddress}'");
+                options.ProviderOptions.PostLogoutRedirectUri = baseAddress;
+                options.ProviderOptions.AdditionalProviderParameters.Add("kc_idp_hint", "discord");
+            })
+                .AddAccountClaimsPrincipalFactory<KeycloakUserFactory>();
+            services.AddAuthorizationCore(options => options.AddSharedPolicies(typeof(Policies)));
 
             AddRuntimeCaches(services);
         }

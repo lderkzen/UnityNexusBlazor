@@ -17,13 +17,8 @@ namespace UnityNexus
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveWebAssemblyComponents();
-            
-            builder.Services.AddBlazorise(options =>
-                {
-                    options.Immediate = true;
-                })
-                .AddBootstrap5Providers()
-                .AddFontAwesomeIcons();
+
+            Client.Program.AddCommonServices(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 

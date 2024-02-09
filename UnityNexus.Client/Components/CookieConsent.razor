@@ -154,9 +154,12 @@
         }
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await CheckIfCookieConsentIsRequired();
+        if (firstRender)
+        {
+            await CheckIfCookieConsentIsRequired();
+        }
     }
 
     private async Task CheckIfCookieConsentIsRequired()
