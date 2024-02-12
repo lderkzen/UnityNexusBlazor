@@ -8,8 +8,11 @@
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public int? DiscordChannelId { get; set; }
-        public DiscordChannel? DiscordChannel { get; set; }
+        public int? CommunicationChannelId { get; set; }
+        public DiscordChannel? CommunicationChannel { get; set; }
+
+        public int OwnerId { get; set; }
+        public DiscordUser Owner { get; set; }
 
         public required string Name { get; set; }
 
