@@ -1,0 +1,32 @@
+<Div Flex="Flex.Row.JustifyContent.Between" Width="Width.Is100" Padding="Padding.Is1">
+    <Div Flex="Flex.Column.JustifyContent.Between" Margin="Margin.Is2.OnY" Height="Height.Is100">
+        <Icon Name="IconName.AngleUp" IconSize="IconSize.Large" />
+        <Icon Name="IconName.AngleDown" IconSize="IconSize.Large" />
+    </Div>
+    <Div Flex="Flex.Column.JustifyContent.Between" Padding="Padding.Is1">
+        <Field>
+            <FieldLabel>Question</FieldLabel>
+            <TextEdit Placeholder="Enter question"></TextEdit>
+        </Field>
+        <Row Width="Width.Is100">
+            <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is12.OnMobile">
+                <Field Horizontal>
+                    <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is2.OnDesktop">Answer Type</FieldLabel>
+                    <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is10.OnDesktop">
+                        <Select TValue="byte">
+                            @foreach (QuestionType questionType in Enum.GetValues(typeof(QuestionType)))
+                            {
+                                <SelectItem Value="(byte)questionType">@questionType.ToString()</SelectItem>
+                            }
+                        </Select>
+                    </FieldBody>
+                </Field>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is12.OnMobile">
+                <Field>
+                    <Check TValue="bool">Required</Check>
+                </Field>
+            </Column>
+        </Row>
+    </Div>
+</Div>

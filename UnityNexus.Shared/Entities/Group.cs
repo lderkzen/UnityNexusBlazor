@@ -1,9 +1,10 @@
-﻿using UnityNexus.Shared.Entities.Abstract;
-
-namespace UnityNexus.Shared.Entities
+﻿namespace UnityNexus.Shared.Entities
 {
-    public class Group : KeyedEntity
+    public class Group
     {
+        [Key]
+        public int Id { get; set; }
+
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 

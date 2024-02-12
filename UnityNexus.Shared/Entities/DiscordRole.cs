@@ -1,8 +1,11 @@
 ﻿namespace UnityNexus.Shared.Entities
 {
-    public class DiscordRole : KeyedEntity
+    public class DiscordRole
     {
-        public required ulong DiscordId { get; set; }
+        [Key]
+        public int Id { get; set; }
+
+        public required string DiscordId { get; set; }
 
         public required string Name { get; set; }
 

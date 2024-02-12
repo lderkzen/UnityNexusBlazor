@@ -3,16 +3,17 @@ using System.Text.Json.Serialization;
 
 namespace UnityNexus.Shared.Entities
 {
-    public class DiscordUser : KeyedEntity
+    public class DiscordUser
     {
         private string? _avatarUrl;
         private IReadOnlyList<string> _roles;
 
-        public required string DiscordUserId { get; set; }
+        [Key]
+        public int Id { get; set; }
+
+        public string? DiscordId { get; set; }
 
         public required string Username { get; set; }
-
-        public required string DisplayName { get; set; }
 
         public string? AvatarHash { get; set; }
 
@@ -20,17 +21,20 @@ namespace UnityNexus.Shared.Entities
         /// Gets the URL from where the avatar can be fetched.
         /// </summary>
         [JsonIgnore]
-        public string AvatarUrl
+        public string? AvatarUrl
         {
             get
             {
+                if (DiscordId is null)
+                    return null;
+
                 if (_avatarUrl is not null)
                     return _avatarUrl;
 
                 if (AvatarHash is not null)
-                    return (_avatarUrl = $"https://cdn.discordapp.com/avatars/{DiscordUserId}/{AvatarHash}.png");
+                    return (_avatarUrl = $"https://cdn.discordapp.com/avatars/{DiscordId}/{AvatarHash}.png");
 
-                var defaultAvatarId = (ulong.TryParse(DiscordUserId!, out var parsedDiscordUserId)
+                var defaultAvatarId = (ulong.TryParse(DiscordId!, out var parsedDiscordUserId)
                                            ? parsedDiscordUserId >> 22
                                            : 0)
                                     % 5;
