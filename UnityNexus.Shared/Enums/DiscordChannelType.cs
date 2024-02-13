@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Shared.Enums
 {
-    public enum DiscordChannelType : byte
+    public enum RemoteChannelType : byte
     {
         Unknown = 0
     }

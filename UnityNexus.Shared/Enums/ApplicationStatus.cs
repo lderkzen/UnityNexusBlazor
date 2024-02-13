@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Shared.Enums
 {
-    public enum ApplicationStatus : byte
+    public enum SubmissionStatus : byte
     {
         Unknown = 0,
         Created = 1,
