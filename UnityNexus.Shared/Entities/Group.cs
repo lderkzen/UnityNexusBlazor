@@ -14,10 +14,7 @@
         public int? NotificationChannelId { get; set; }
 
         [Column("owner_id")]
-        public int OwnerId { get; set; }
-
-        [Column("name")]
-        public required string Name { get; set; }
+        public Guid? OwnerId { get; set; }
 
         [Column("intro")]
         public required string Intro { get; set; }
@@ -39,7 +36,6 @@
 
         public Category? Category { get; set; }
         public RemoteChannel? NotificationChannel { get; set; }
-        public required NexusUser Owner { get; set; }
 
         public ICollection<Form> Forms { get; } = [];
     }

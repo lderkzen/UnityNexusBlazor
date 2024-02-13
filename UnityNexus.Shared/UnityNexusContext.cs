@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
-namespace UnityNexus.Shared
+﻿namespace UnityNexus.Shared
 {
     public class UnityNexusContext : DbContext
     {
-        public DbSet<NexusUser> Users { get; set; } = null!;
         public DbSet<RemoteRole> Roles { get; set; } = null!;
         public DbSet<RemoteChannel> Channels { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;

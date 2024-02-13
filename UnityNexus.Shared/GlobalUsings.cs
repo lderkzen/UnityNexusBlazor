@@ -9,6 +9,7 @@ global using System.Text;
 global using System.Text.Json;
 global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.EntityFrameworkCore;
 global using UnityNexus.Shared.Auth;
 global using UnityNexus.Shared.BLL;
 global using UnityNexus.Shared.Entities;

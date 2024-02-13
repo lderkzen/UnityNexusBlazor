@@ -11,7 +11,7 @@ namespace UnityNexus.Shared.Entities
         public required int FormId { get; set; }
 
         [Column("applicant_id")]
-        public required int ApplicantId { get; set; }
+        public required Guid ApplicantId { get; set; }
 
         [Column("status")]
         public required SubmissionStatus Status { get; set; }
@@ -29,7 +29,6 @@ namespace UnityNexus.Shared.Entities
         public DateTime? DeletedAt { get; set; }
 
         public required Form Form { get; set; }
-        public required NexusUser Applicant { get; set; }
 
         public ICollection<Answer> Answers { get; } = [];
     }
