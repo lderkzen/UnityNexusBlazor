@@ -2,6 +2,7 @@ namespace UnityNexus.Shared.Models
 {
     public record Role(
         string Name,
-        string? HexColorCode
+        string? HexColorCode,
+        byte? PowerLevel
     );
 }

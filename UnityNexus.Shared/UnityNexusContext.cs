@@ -29,7 +29,7 @@
                 Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_HOST"),
                 Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_PORT"),
                 Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_USERNAME"),
-                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_USERNAME"),
+                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_PASSWORD"),
                 Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_NAME")
             );
         }

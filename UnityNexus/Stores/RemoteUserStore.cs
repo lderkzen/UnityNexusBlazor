@@ -1,6 +1,6 @@
 namespace UnityNexus.Stores
 {
-    public class RemoteUserStore : IRemoteUserStore
+    public class RemoteUserStore : RemoteKeycloakStore, IRemoteUserStore
     {
         private readonly IMemoryCache _memoryCache;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -33,7 +33,7 @@ namespace UnityNexus.Stores
             return id.GetGuid();
         }
 
-        private static UserModel? CreateUser(
+        private static UserModel? CreateUserModel(
             string userJson,
             string rolesJson,
             Role[] allRoles
@@ -73,6 +73,10 @@ namespace UnityNexus.Stores
             }
 
             List<string> userRoles = ParseRoles(rolesJson);
+            byte maxPowerLevel = allRoles.Where(m => userRoles.Contains(m.Name) && m.PowerLevel is not null)
+                                        .Select(m => m.PowerLevel!.Value)
+                                        .Append<byte>(0) // At least one value is required for Max() to work.
+                                        .Max();
 
             return new UserModel
             {
@@ -81,7 +85,8 @@ namespace UnityNexus.Stores
                 DiscordUserId = discordUserId,
                 AvatarId = avatarId,
                 Nickname = nickname,
-                Roles = userRoles
+                Roles = userRoles,
+                PowerLevel = maxPowerLevel
             };
         }
 
@@ -103,14 +108,71 @@ namespace UnityNexus.Stores
             return mappedRoles;
         }
 
-        public Task<List<int>> GetAllUserIdsAsync()
+        public async Task<List<Guid>?> GetAllUserIdsAsync()
         {
-            throw new NotImplementedException();
+            HttpClient httpClient = _httpClientFactory.CreateClient("keycloak");
+            await _keycloakAccessTokenManager.SetAccessTokenAsync(httpClient);
+
+            HttpResponseMessage countResponse = await httpClient.GetAsync($"/admin/realms/{_realm}/users/count/?enabled=true");
+            if (!countResponse.IsSuccessStatusCode)
+                return null;
+            string countBody = await countResponse.Content.ReadAsStringAsync();
+
+            HttpResponseMessage response = await httpClient.GetAsync($"/admin/realms/{_realm}/users/?briefRepresentation=true&enabled=true&max={countBody}");
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            string usersJson = await response.Content.ReadAsStringAsync();
+            JsonDocument usersDocument = JsonDocument.Parse(usersJson);
+
+            return usersDocument.RootElement
+                .EnumerateArray()
+                .Select(TryGetUserIdFromResponse)
+                .Where(userId => userId is not null)
+                .Cast<Guid>()
+                .ToList()!;
         }
 
-        public Task<UserModel> GetUserModelByIdAsync(int userId)
+        public async Task<UserModel?> GetUserModelByIdAsync(int userId)
         {
-            throw new NotImplementedException();
+            if (_memoryCache.TryGetValue(userId, out UserModel? result))
+                return result;
+
+            HttpClient httpClient = _httpClientFactory.CreateClient("keycloak");
+            await _keycloakAccessTokenManager.SetAccessTokenAsync(httpClient);
+
+            Guid? clientGuid = await GetClientGuid(httpClient, _keycloakAccessTokenManager, _realm, _clientId);
+            if (clientGuid is null)
+                return null;
+
+            HttpResponseMessage response = await httpClient.GetAsync($"/admin/realms/{_realm}/users/{userId}");
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            string userJson = await response.Content.ReadAsStringAsync();
+
+            await _keycloakAccessTokenManager.SetAccessTokenAsync(httpClient);
+            response = await httpClient.GetAsync($"/admin/realms/{_realm}/users/{userId}/role-mappings/clients/{clientGuid}/composite");
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            string rolesJson = await response.Content.ReadAsStringAsync();
+            Role[] allRoles = await _remoteRoleStore.GetAllRolesAsync();
+
+            result = CreateUserModel(userJson, rolesJson, allRoles);
+            if (result is null)
+                return null;
+
+            _memoryCache.Set(
+                userId,
+                result,
+                new MemoryCacheEntryOptions
+                {
+                    SlidingExpiration = TimeSpan.FromMinutes(5),
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15)
+                }
+            );
+            return result;
         }
     }
 }
