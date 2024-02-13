@@ -5,10 +5,10 @@ namespace UnityNexus.Client.Interface.Cache
 {
     public interface IDiscordUserCache
     {
-        public Task<DiscordUser> GetUserAsync(ClaimsPrincipal claimsPrincipal);
+        public Task<NexusUser> GetUserAsync(ClaimsPrincipal claimsPrincipal);
 
-        public Task<DiscordUser> GetUserAsync(int userId);
+        public Task<NexusUser> GetUserAsync(int userId);
 
-        public Task<IReadOnlyCollection<DiscordUser>> GetUsersAsync(IEnumerable<int> userIds);
+        public Task<IReadOnlyCollection<NexusUser>> GetUsersAsync(IEnumerable<int> userIds);
     }
 }
