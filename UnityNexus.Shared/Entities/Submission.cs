@@ -16,6 +16,9 @@ namespace UnityNexus.Shared.Entities
         [Column("status")]
         public required SubmissionStatus Status { get; set; }
 
+        [Column("visibility_level")]
+        public required VisibilityLevel VisibilityLevel { get; set; }
+
         [Column("created_at")]
         public required DateTime CreatedAt { get; set; }
 

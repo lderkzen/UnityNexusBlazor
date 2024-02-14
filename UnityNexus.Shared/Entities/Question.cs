@@ -10,8 +10,8 @@ namespace UnityNexus.Shared.Entities
         [Column("form_id")]
         public required int FormId { get; set; }
 
-        [Column("type")]
-        public required QuestionType Type { get; set; }
+        [Column("answer_type")]
+        public required AnswerType AnswerType { get; set; }
 
         [Column("content")]
         public required string Content { get; set; }

@@ -11,7 +11,7 @@
         public int? CategoryId { get; set; }
 
         [Column("notification_channel_id")]
-        public int? NotificationChannelId { get; set; }
+        public Guid? NotificationChannelId { get; set; }
 
         [Column("owner_id")]
         public Guid? OwnerId { get; set; }
@@ -35,7 +35,6 @@
         public DateTime? DeletedAt { get; set; }
 
         public Category? Category { get; set; }
-        public RemoteChannel? NotificationChannel { get; set; }
 
         public ICollection<Form> Forms { get; } = [];
     }

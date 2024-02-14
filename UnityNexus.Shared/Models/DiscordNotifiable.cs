@@ -4,7 +4,7 @@
     {
         public required string Identifier { get; set; }
         public required string ReadableIdentifier { get; set; }
-        public required DiscordNotifiableType Type { get; set; }
+        public required RemoteNotifiableType Type { get; set; }
         public bool ShouldIdentify { get; set; }
 
         public string ToFormattedString()

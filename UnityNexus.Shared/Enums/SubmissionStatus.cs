@@ -5,7 +5,7 @@
         Unknown = 0,
         Created = 1,
         Submitted = 2,
-        Revision = 3,
+        Revised = 3,
         Suspended = 4,
         Closed = 5
     }

@@ -2,8 +2,6 @@
 {
     public class UnityNexusContext : DbContext
     {
-        public DbSet<RemoteRole> Roles { get; set; } = null!;
-        public DbSet<RemoteChannel> Channels { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Group> Groups { get; set; } = null!;
         public DbSet<Form> Forms { get; set; } = null!;

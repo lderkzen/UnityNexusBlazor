@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Shared.Enums
 {
-    public enum QuestionType : byte
+    public enum AnswerType : byte
     {
         Unknown = 0,
         String = 1,
