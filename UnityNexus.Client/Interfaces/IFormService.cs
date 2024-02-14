@@ -1,4 +1,4 @@
-namespace UnityNexus.Client.Interface
+namespace UnityNexus.Client.Interfaces
 {
     public interface IFormService
     {
