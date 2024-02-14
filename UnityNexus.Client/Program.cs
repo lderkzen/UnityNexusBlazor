@@ -92,7 +92,7 @@ namespace UnityNexus.Client
 
         private static void AddRuntimeCaches(IServiceCollection services)
         {
-            services.AddScoped<IDiscordUserCache, DiscordUserCache>();
+
         }
     }
 }

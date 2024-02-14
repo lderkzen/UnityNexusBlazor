@@ -14,9 +14,9 @@
                     <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is2.OnDesktop">Answer Type</FieldLabel>
                     <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is10.OnDesktop">
                         <Select TValue="byte">
-                            @foreach (QuestionType questionType in Enum.GetValues(typeof(QuestionType)))
+                            @foreach (AnswerType answerType in Enum.GetValues(typeof(AnswerType)))
                             {
-                                <SelectItem Value="(byte)questionType">@questionType.ToString()</SelectItem>
+                                <SelectItem Value="(byte)answerType">@answerType.ToString()</SelectItem>
                             }
                         </Select>
                     </FieldBody>
