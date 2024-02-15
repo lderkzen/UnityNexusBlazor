@@ -13,17 +13,18 @@ namespace UnityNexus.Extensions
             builder.Configuration.AddConfiguration(configuration);
 
             builder.Services
+                .AddUnityNexusContext()
                 .AddCookiePolicy()
                 .AddStores()
                 .AddHttpClient(
                     "keycloak",
-                    (provider, client) => {
+                    (provider, client) =>
+                    {
                         JwtBearerOptions? jwtBearerOptions = provider.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>()
                             .Get(JwtBearerDefaults.AuthenticationScheme);
                         client.BaseAddress = new Uri(jwtBearerOptions.Authority!);
                     }
                 );
-
 
             return builder;
         }

@@ -9,27 +9,13 @@
         public DbSet<Submission> Submissions { get; set; } = null!;
         public DbSet<Answer> Answers { get; set; } = null!;
 
-        public UnityNexusContext()
+        public UnityNexusContext(DbContextOptions<UnityNexusContext> options): base(options)
         {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseNpgsql(GenerateConnectionString());
-        }
-
-        private static string GenerateConnectionString()
-        {
-            return string.Format(
-                "Server={0};Port={1};User ID={2};Password={3};Database={4}",
-                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_HOST"),
-                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_PORT"),
-                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_USERNAME"),
-                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_PASSWORD"),
-                Environment.GetEnvironmentVariable("UNITY_NEXUS_DB_NAME")
-            );
         }
     }
 }
