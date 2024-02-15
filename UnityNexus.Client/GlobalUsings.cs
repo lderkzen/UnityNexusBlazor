@@ -1,5 +1,6 @@
 ﻿global using System.Collections.Concurrent;
 global using System.Net.Http;
+global using System.Security.Claims;
 global using System.Text.Json;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.AspNetCore.Components.WebAssembly.Authentication;

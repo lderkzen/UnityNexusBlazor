@@ -1,7 +1,8 @@
-﻿<Bar Breakpoint="Breakpoint.Desktop" NavigationBreakpoint="Breakpoint.Tablet" ThemeContrast="ThemeContrast.Dark"
-    Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Small">
+﻿<Bar Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Small" Breakpoint="Breakpoint.Widescreen"
+    NavigationBreakpoint="Breakpoint.Desktop" ThemeContrast="ThemeContrast.Dark" Background="Background.Body"
+    TextColor="TextColor.Light">
     <BarToggler />
-    <BarBrand>
+    <BarBrand Background="Background.Body" Class="bar-brand">
         <BarItem>
             <BarLink To="/">
                 <BarIcon IconName="customBrand" />
@@ -18,18 +19,6 @@
                 </BarLink>
             </BarItem>
             <BarItem>
-                <BarLink To="/counter">
-                    <BarIcon IconName="IconName.PlusSquare" />
-                    Counter
-                </BarLink>
-            </BarItem>
-            <BarItem>
-                <BarLink To="/weather">
-                    <BarIcon IconName="IconName.Cloud" />
-                    Weather
-                </BarLink>
-            </BarItem>
-            <BarItem>
                 <BarDropdown>
                     <BarDropdownToggle>
                         <BarIcon IconName="IconName.Wrench" />
@@ -37,6 +26,22 @@
                     </BarDropdownToggle>
                     <BarDropdownMenu>
                         <BarDropdownItem To="/admin/groups">Groups</BarDropdownItem>
+                    </BarDropdownMenu>
+                </BarDropdown>
+            </BarItem>
+            <BarItem>
+                <BarDropdown>
+                    <BarDropdownToggle>
+                        <BarIcon IconName="IconName.ExclamationTriangle" />
+                        Test
+                    </BarDropdownToggle>
+                    <BarDropdownMenu>
+                        <BarItem>
+                            <BarLink To="/counter">Counter</BarLink>
+                        </BarItem>
+                        <BarItem>
+                            <BarLink To="/weather">Weather</BarLink>
+                        </BarItem>
                     </BarDropdownMenu>
                 </BarDropdown>
             </BarItem>

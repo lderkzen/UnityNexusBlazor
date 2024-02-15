@@ -1,12 +1,10 @@
-using System.Security.Claims;
-using UnityNexus.Shared.Models;
-
 namespace UnityNexus.Client.Caches.Interfaces
 {
     public interface IUserCache
     {
+        public Task<IReadOnlyCollection<UserModel>> GetAllUsersAsync();
+        public Task<IReadOnlyCollection<UserModel>> GetUsersByIdsAsync(IEnumerable<Guid> userIds);
         public Task<UserModel> GetUserAsync(ClaimsPrincipal claimsPrincipal);
         public Task<UserModel> GetUserAsync(Guid userId);
-        public Task<IReadOnlyCollection<UserModel>> GetUsersAsync(IEnumerable<Guid> userIds);
     }
 }

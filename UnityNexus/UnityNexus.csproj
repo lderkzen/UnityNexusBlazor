@@ -7,10 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotEnvGenerator" Version="0.1.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Keycloak.AuthServices.Authentication" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+      <AdditionalFiles Include="Database.env" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UnityNexus.Client\UnityNexus.Client.csproj" />
   </ItemGroup>
