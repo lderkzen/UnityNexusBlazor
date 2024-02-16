@@ -1,16 +1,10 @@
 @page "/admin/groups/manage"
 
-<Row>
-    <Column>
-        <Card Margin="Margin.Is4.OnY">
-            <CardBody>
-                <DataGrid TItem="Group">
+<h4 class="mt-3">
+    Configure groups
+</h4>
 
-                </DataGrid>
-            </CardBody>
-        </Card>
-    </Column>
-</Row>
-
-@code {
+@if (_groups is null && _groupsPagingInfo is null)
+{
+    <p>Loading...</p>
 }

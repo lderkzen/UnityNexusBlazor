@@ -1,0 +1,13 @@
+@if (CommandContext is not null)
+{
+    <Button Color="Color.Light" Outline="true" Clicked="@CommandContext.Clicked">
+        New
+    </Button>
+}
+
+@code {
+
+    [Parameter]
+    public CommandContext? CommandContext { get; set; }
+
+}

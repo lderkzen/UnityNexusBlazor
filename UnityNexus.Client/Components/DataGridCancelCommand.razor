@@ -1,0 +1,15 @@
+@typeparam TItem
+
+@if (CommandContext is not null)
+{
+    <Button Color="Color.Danger" Outline="true" Clicked="@CommandContext.Clicked">
+        Cancel
+    </Button>
+}
+
+@code {
+
+    [Parameter]
+    public CommandContext<TItem>? CommandContext { get; set; }
+
+}

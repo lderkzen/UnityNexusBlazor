@@ -1,6 +1,6 @@
 namespace UnityNexus.Shared.Models
 {
-    public record Channel(
+    public record NotificationChannel(
         string Name,
         string id,
         RemoteChannelType Type

@@ -1,0 +1,100 @@
+@typeparam TItem
+
+@if(Data is not null)
+{
+    <Pagination>
+        <PaginationItem Disabled="@(!Data.HasPreviousPage)">
+            <PaginationLink Page="@((Data.CurrentPage - 1).ToString())" Clicked="@NavigateToPage">
+                <span aria-hidden="true">«</span>
+            </PaginationLink>
+        </PaginationItem>
+        @for (var i = -2; i <= 2; i++)
+        {
+            if (i == -2 && Data.CurrentPage + i > 1)
+            {
+                <PaginationItem>
+                    <PaginationLink Page="1" Clicked="@NavigateToPage">
+                        1
+                    </PaginationLink>
+                </PaginationItem>
+
+                if (Data.CurrentPage + i > 2)
+                {
+                    <PaginationItem Disabled="true">
+                        <PaginationLink>
+                            ...
+                        </PaginationLink>
+                    </PaginationItem>
+                }
+            }
+
+            var targetPageNumber = Data.CurrentPage + i;
+            @if(targetPageNumber >= 1 && targetPageNumber <= Data.TotalPages)
+            {
+                <PaginationItem Disabled="@(targetPageNumber == Data.CurrentPage)">
+                    <PaginationLink Page="@targetPageNumber.ToString()" Clicked="@NavigateToPage">
+                        @targetPageNumber
+                    </PaginationLink>
+                </PaginationItem>
+            }
+
+            if (i == 2 && Data.CurrentPage + i < Data.TotalPages)
+            {
+                if (Data.CurrentPage + i < Data.TotalPages - 1)
+                {
+                    <PaginationItem Disabled="true">
+                        <PaginationLink>
+                            ...
+                        </PaginationLink>
+                    </PaginationItem>
+                }
+
+                <PaginationItem>
+                    <PaginationLink Page="@(Data.TotalPages.ToString())" Clicked="@NavigateToPage">
+                        @Data.TotalPages
+                    </PaginationLink>
+                </PaginationItem>
+            }
+        }
+        <PaginationItem Disabled="@(!Data.HasNextPage)">
+            <PaginationLink Page="@((Data.CurrentPage + 1).ToString())" Clicked="@NavigateToPage">
+                <span aria-hidden="true">»</span>
+            </PaginationLink>
+        </PaginationItem>
+    </Pagination>
+}
+
+@code {
+
+    private PaginationBaseResponse<TItem>? _data;
+
+    private Action<int>? _navigateToPageHandler;
+
+    [Parameter]
+    public PaginationBaseResponse<TItem>? Data
+    {
+        get => _data;
+        set
+        {
+            _data = value;
+            StateHasChanged();
+        }
+    }
+
+    [Parameter]
+    public Action<int>? NavigateToPageHandler
+    {
+        get => _navigateToPageHandler;
+        set
+        {
+            _navigateToPageHandler = value;
+            StateHasChanged();
+        }
+    }
+
+    private void NavigateToPage(string page)
+    {
+        NavigateToPageHandler?.Invoke(int.Parse(page));
+    }
+
+}
