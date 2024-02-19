@@ -19,10 +19,10 @@ else
                     <ListGroup Flush="true">
                         @foreach (GroupModel group in _groups.OrderBy(g => g.Position).ThenBy(g => g.CategoryId).ThenBy(g =>g.Title))
                         {
-                            <ListGroupItem Flex="Flex.Row.AlignItems.Center" Padding="Padding.Is2.OnY">
+                            <ListGroupItem Flex="Flex.Row.AlignItems.Center" Padding="Padding.Is4.OnY">
                                 @if (!string.IsNullOrEmpty(group.Image))
                                 {
-                                    <Image Source="@group.Image" Alt="Group Logo" Style="width: 150px; height: 150px;"></Image>
+                                    <Image Source="@group.Image" Alt="Group Logo" Style="width: 200px; height: 200px;"></Image>
                                 }
                                 <Div Flex="Flex.Column.JustifyContent.Around">
                                     <Div Flex="Flex.Column.JustifyContent.Center">
@@ -40,7 +40,7 @@ else
                                             <Div Margin="Margin.Is1.OnY">
                                                 @foreach (int tagId in group.TagIds.OrderBy(t => t))
                                                 {
-                                                    <Badge Color="Color.Info">@_tags[tagId].Content</Badge>
+                                                    <Badge Color="Color.Info" Margin="Margin.Is1">@_tags[tagId].Content</Badge>
                                                 }
                                             </Div>
                                         }

@@ -18,9 +18,8 @@
             else
             {
                 <CardBody>
-                    <DataGrid TItem="GroupModel" Data="@_groups" Editable="false" EditMode="DataGridEditMode.Popup"
-                        RowInserted="@GroupAddedAsync" RowUpdated="@GroupUpdatedAsync" PageSize="10" Sortable="false"
-                        Striped="true" Bordered="false">
+                    <DataGrid Responsive ShowPager Filterable Sortable TItem="GroupModel" Data="@_groups" Editable="false" EditMode="DataGridEditMode.Popup"
+                        RowInserted="@GroupAddedAsync" RowUpdated="@GroupUpdatedAsync" PageSize="10" Striped="true" Bordered="true">
                         <DataGridCommandColumn TItem="GroupModel" DeleteCommandAllowed="false">
                             <NewCommandTemplate>
                                 <DataGridNewCommand CommandContext="@context" />
@@ -35,23 +34,13 @@
                                 <DataGridCancelCommand TItem="GroupModel" CommandContext="@context" />
                             </CancelCommandTemplate>
                         </DataGridCommandColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Id)" Caption="Preview"
-                            Editable="false">
-                            <DisplayTemplate>
-                                @{
-                                    if (context is GroupModel model)
-                                    {
-                                        <GroupBadge Model="@model" />
-                                    }
-                                }
-                            </DisplayTemplate>
-                        </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.CategoryId)" Editable="false">
+                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Id)" Caption="Id"></DataGridColumn>
+                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.CategoryId)" Caption="Category">
                             <DisplayTemplate>
                                 @{
                                     if (context is GroupModel model && model.CategoryId is not null)
                                     {
-                                        <CategoryBadge Model="@_categories[(int)model.CategoryId]" />
+                                        @_categories[(int)model.CategoryId].Name
                                     }
                                     else
                                     {
@@ -60,19 +49,9 @@
                                 }
                             </DisplayTemplate>
                         </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Title"
-                            Editable="false">
-                            <DisplayTemplate>
-                                @{
-                                    if (context is GroupModel model)
-                                    {
-                                        @(model.Title)
-                                    }
-                                }
-                            </DisplayTemplate>
-                        </DataGridColumn>
+                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Title"></DataGridColumn>
                         <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.NotificationChannelId)"
-                            Caption="Notification Channel" Editable="false">
+                            Caption="Notification Channel">
                             <DisplayTemplate>
                                 @{
                                     if (context is GroupModel model)
@@ -82,50 +61,10 @@
                                 }
                             </DisplayTemplate>
                         </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.IsLocked)" Caption="Locked"
-                            Editable="false">
-                            <DisplayTemplate>
-                                @{
-                                    if (context is GroupModel model)
-                                    {
-                                        @(model.IsLocked ? "Yes" : "No")
-                                    }
-                                }
-                            </DisplayTemplate>
-                        </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.CreatedAt)" Caption="Created At"
-                            Editable="false">
-                            <DisplayTemplate>
-                                @{
-                                    if (context is GroupModel model)
-                                    {
-                                        @(model.CreatedAt?.ToString("yyyy-MM-dd HH:mm") ?? "Unavailable")
-                                    }
-                                }
-                            </DisplayTemplate>
-                        </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.UpdatedAt)" Caption="Updated At"
-                            Editable="false">
-                            <DisplayTemplate>
-                                @{
-                                    if (context is GroupModel model)
-                                    {
-                                        @(model.UpdatedAt?.ToString("yyyy-MM-dd HH:mm") ?? "Unavailable")
-                                    }
-                                }
-                            </DisplayTemplate>
-                        </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.IsDeleted)" Caption="Deleted"
-                            Editable="false">
-                            <DisplayTemplate>
-                                @{
-                                    if (context is GroupModel model)
-                                    {
-                                        @(model.IsDeleted ? "Yes" : "No")
-                                    }
-                                }
-                            </DisplayTemplate>
-                        </DataGridColumn>
+                        <DataGridCheckColumn TItem="GroupModel" Field="@nameof(GroupModel.IsLocked)" Caption="Locked"></DataGridCheckColumn>
+                        <DataGridCheckColumn TItem="GroupModel" Field="@nameof(GroupModel.IsDeleted)" Caption="Deleted"></DataGridCheckColumn>
+                        <DataGridDateColumn TItem="GroupModel" Field="@nameof(GroupModel.CreatedAt)" Caption="Created At" Editable="false"></DataGridDateColumn>
+                        <DataGridDateColumn TItem="GroupModel" Field="@nameof(GroupModel.UpdatedAt)" Caption="Updated At" Editable="false"></DataGridDateColumn>
                     </DataGrid>
                 </CardBody>
             }
