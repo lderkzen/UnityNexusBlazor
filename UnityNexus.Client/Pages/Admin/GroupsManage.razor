@@ -49,9 +49,13 @@
                         <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.CategoryId)" Editable="false">
                             <DisplayTemplate>
                                 @{
-                                    if (context is GroupModel model)
+                                    if (context is GroupModel model && model.CategoryId is not null)
                                     {
-                                        @(model.CategoryId)
+                                        <CategoryBadge Model="@_categories[(int)model.CategoryId]" />
+                                    }
+                                    else
+                                    {
+                                        @("Unavailable")
                                     }
                                 }
                             </DisplayTemplate>

@@ -1,11 +1,11 @@
 @if (Model is not null)
 {
     <Button Color="Color.Secondary" Class="btn-outline-light">
-    @* @onclick="@(() => ModalDialogMessenger.ShowItemDetailsDialog(new ItemInfoModel(Model, _itemLevel, _itemCategory,
-    _itemType)))"> *@
+        @* @onclick="@(() => ModalDialogMessenger.ShowItemDetailsDialog(new ItemInfoModel(Model, _itemLevel, _itemCategory,
+        _itemType)))"> *@
         <Row Padding="Padding.Is0">
             <Column Padding="Padding.Is1" Class="item-badge-text text-truncate">
-                @Model.Title
+                @Model.Name
             </Column>
         </Row>
     </Button>
