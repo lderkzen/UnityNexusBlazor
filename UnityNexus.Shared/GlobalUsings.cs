@@ -3,6 +3,7 @@ global using System.Collections.Generic;
 global using System.ComponentModel.DataAnnotations;
 global using System.Linq;
 global using System.Reflection;
+global using System.Text.Json.Serialization;
 global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Authorization;
 global using UnityNexus.Shared.Enums;

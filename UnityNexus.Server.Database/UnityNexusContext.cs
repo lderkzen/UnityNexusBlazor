@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Server.Database
 {
-    public class UnityNexusContext : DbContext
+    public partial class UnityNexusContext : DbContext
     {
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Group> Groups { get; set; } = null!;
@@ -17,5 +17,13 @@
         {
             base.OnConfiguring(optionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

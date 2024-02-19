@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Shared.Enums
 {
-    public enum RemoteNotifiableType : byte
+    public enum NotifiableType : byte
     {
         Unknown = 0,
         DiscordUser = 1,

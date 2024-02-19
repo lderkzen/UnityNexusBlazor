@@ -4,9 +4,27 @@ namespace UnityNexus.Server.Extensions
 {
     internal static class ServiceCollectionExtensions
     {
-        internal static IServiceCollection AddStores(this IServiceCollection services)
+        internal static IServiceCollection ConfigureForwardedHeadersOptions(
+            this IServiceCollection services,
+            IConfiguration configuration
+        )
         {
-            services.AddScoped<IGroupStore, GroupStore>();
+            // See https://stackoverflow.com/a/44390593/2132796 for details about network configuration.
+            // This is required when hosting UNITS behind a reverse proxy like Caddy.
+            var networkSection = configuration.GetSection("Network");
+            var networkPrefix = networkSection["NetworkPrefix"];
+            var proxy = networkSection["Proxy"];
+            if (!string.IsNullOrEmpty(networkPrefix) && !string.IsNullOrEmpty(proxy))
+            {
+                services.Configure<ForwardedHeadersOptions>(options =>
+                {
+                    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                    options.KnownNetworks.Clear();
+                    options.KnownNetworks.Add(new Microsoft.AspNetCore.HttpOverrides.IPNetwork(IPAddress.Parse(networkPrefix), 24));
+                    options.KnownProxies.Clear();
+                    options.KnownProxies.Add(IPAddress.Parse(proxy));
+                });
+            }
 
             return services;
         }
@@ -24,6 +42,19 @@ namespace UnityNexus.Server.Extensions
                     DotEnv.Generated.DatabaseEnvironment.UnityNexusDbName
                 ));
             });
+
+            return services;
+        }
+
+        internal static IServiceCollection AddAppConfiguration(this IServiceCollection services)
+        {
+            services.AddTransient<IAppConfigurationStore, AppConfigurationStore>();
+            return services;
+        }
+
+        internal static IServiceCollection AddStores(this IServiceCollection services)
+        {
+            services.AddScoped<IGroupStore, GroupStore>();
 
             return services;
         }
