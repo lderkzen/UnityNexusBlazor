@@ -1,11 +1,11 @@
-using Blazorise.DataGrid;
 
-namespace UnityNexus.Client.Pages.Admin
+namespace UnityNexus.Client.Pages
 {
-    public partial class GroupsManage
+    public partial class Groups
     {
         private ObservableCollection<GroupModel>? _groups;
         private Dictionary<int, CategoryModel>? _categories;
+        private Dictionary<int, TagModel>? _tags;
 
         protected override async Task OnInitializedAsync()
         {
@@ -15,6 +15,7 @@ namespace UnityNexus.Client.Pages.Admin
         private Task LoadGroupsAsync()
         {
             _categories = [];
+            _tags = [];
             _groups = [];
 
             StateHasChanged();
@@ -37,8 +38,23 @@ namespace UnityNexus.Client.Pages.Admin
                     GroupIds = [3, 4]
                 }
             );
-            _groups.Add(new GroupModel
-            {
+            _tags.Add(
+                1,
+                new TagModel
+                {
+                    Id = 1,
+                    Content = "Min. 25 hrs weekly"
+                }
+            );
+            _tags.Add(
+                2,
+                new TagModel
+                {
+                    Id = 2,
+                    Content = "Event participation mandatory"
+                }
+            );
+            _groups.Add(new GroupModel {
                 Id = 1,
                 CategoryId = 1,
                 Title = "Member",
@@ -82,20 +98,6 @@ namespace UnityNexus.Client.Pages.Admin
 
             StateHasChanged();
             return Task.CompletedTask;
-        }
-
-        private async Task GroupAddedAsync(SavedRowItem<GroupModel, Dictionary<string, object>> row)
-        {
-            // var created = await ItemsManager.CreateItemAsync(row.NewItem);
-            // if (!created)
-            //     _groups?.Remove(row.NewItem);
-            throw new NotImplementedException();
-        }
-
-        private async Task GroupUpdatedAsync(SavedRowItem<GroupModel, Dictionary<string, object>> row)
-        {
-            // await ItemsManager.UpdateItemAsync(row.NewItem);
-            throw new NotImplementedException();
         }
     }
 }

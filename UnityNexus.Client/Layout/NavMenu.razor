@@ -12,24 +12,24 @@
     </BarBrand>
     <BarMenu>
         <BarStart>
-            <BarItem>
+            <BarItem Class="nav-item">
                 <BarLink To="/groups">
                     <BarIcon IconName="IconName.Users" />
                     Groups
                 </BarLink>
             </BarItem>
-            <BarItem>
+            <BarItem Class="nav-item">
                 <BarDropdown>
                     <BarDropdownToggle>
                         <BarIcon IconName="IconName.Wrench" />
                         Admin
                     </BarDropdownToggle>
                     <BarDropdownMenu>
-                        <BarDropdownItem To="/admin/groups">Groups</BarDropdownItem>
+                        <BarDropdownItem To="/admin/groups/manage">Groups</BarDropdownItem>
                     </BarDropdownMenu>
                 </BarDropdown>
             </BarItem>
-            <BarItem>
+            <BarItem Class="nav-item">
                 <BarDropdown>
                     <BarDropdownToggle>
                         <BarIcon IconName="IconName.ExclamationTriangle" />

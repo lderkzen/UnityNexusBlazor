@@ -6,87 +6,68 @@
 
 <h1>Groups</h1>
 
-<Row>
-    <Column ColumnSize="ColumnSize.Is4.OnWidescreen.Is6.OnTablet.Is12.OnMobile">
-        <Card Margin="Margin.Is4.OnY">
-            <CardImage Source="/images/hou_logo_large.png" Alt="Group Logo"></CardImage>
-            <CardBody>
-                <CardTitle Size="3">Hand of Unity</CardTitle>
-                <CardSubtitle TextSize="TextSize.Heading5">Member</CardSubtitle>
-                <CardText Margin="Margin.Is2.OnY">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                </CardText>
-                <Button Color="Color.Primary" Margin="Margin.Is2.FromTop" Disabled="@true">
-                    Joined! <Icon Name="IconName.Check"></Icon>
-                </Button>
-            </CardBody>
-        </Card>
-    </Column>
-    <Column ColumnSize="ColumnSize.Is4.OnWidescreen.Is6.OnTablet.Is12.OnMobile">
-        <Card Margin="Margin.Is4.OnY">
-            <CardImage Source="/images/hou_logo_large.png" Alt="Group Logo"></CardImage>
-            <CardBody>
-                <CardTitle Size="3">Hand of Unity</CardTitle>
-                <CardSubtitle TextSize="TextSize.Heading5">Social Member</CardSubtitle>
-                <CardText Margin="Margin.Is2.OnY">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                </CardText>
-                <Button Color="Color.Primary" Margin="Margin.Is2.FromTop" Disabled="@true">
-                    Cannot Join! <Icon Name="IconName.Times"></Icon>
-                </Button>
-            </CardBody>
-        </Card>
-    </Column>
-    <Column ColumnSize="ColumnSize.Is4.OnWidescreen.Is6.OnTablet.Is12.OnMobile">
-        <Card Margin="Margin.Is4.OnY">
-            <CardImage Source="/images/hou_logo_large.png" Alt="Group Logo"></CardImage>
-            <CardBody>
-                <CardTitle Size="3">Ashes of Creation</CardTitle>
-                <CardSubtitle TextSize="TextSize.Heading5">
-                    Main Guild: Hand of Unity
-                </CardSubtitle>
-                <Div Margin="Margin.Is1.OnY">
-                    <Badge Color="Color.Info">Min. 25 hrs weekly</Badge>
-                    <Badge Color="Color.Info">Event participation mandatory</Badge>
-                </Div>
-                <CardText Margin="Margin.Is2.OnY">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                </CardText>
-                <Button Color="Color.Primary" Margin="Margin.Is2.FromTop">
-                    Apply <Icon Name="IconName.Pen"></Icon>
-                </Button>
-            </CardBody>
-        </Card>
-    </Column>
-    <Column ColumnSize="ColumnSize.Is4.OnWidescreen.Is6.OnTablet.Is12.OnMobile">
-        <Card Margin="Margin.Is4.OnY">
-            <CardImage Source="/images/hou_logo_large.png" Alt="Group Logo"></CardImage>
-            <CardBody>
-                <CardTitle Size="3">Ashes of Creation</CardTitle>
-                <CardSubtitle TextSize="TextSize.Heading5">Social Guild: Fellowship of Unity</CardSubtitle>
-                <CardText Margin="Margin.Is2.OnY">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                    nisi
-                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                </CardText>
-                <Button Color="Color.Primary" Margin="Margin.Is2.FromTop">
-                    Apply <Icon Name="IconName.Pen"></Icon>
-                </Button>
-            </CardBody>
-        </Card>
-    </Column>
-</Row>
+@if (_groups is null || _categories is null || _tags == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <Row>
+        <Column ColumnSize="ColumnSize.IsFull">
+            <Card>
+                <CardBody>
+                    <ListGroup Flush="true">
+                        @foreach (GroupModel group in _groups.OrderBy(g => g.Position).ThenBy(g => g.CategoryId).ThenBy(g =>g.Title))
+                        {
+                            <ListGroupItem Flex="Flex.Row.AlignItems.Center" Padding="Padding.Is2.OnY">
+                                @if (!string.IsNullOrEmpty(group.Image))
+                                {
+                                    <Image Source="@group.Image" Alt="Group Logo" Style="width: 150px; height: 150px;"></Image>
+                                }
+                                <Div Flex="Flex.Column.JustifyContent.Around">
+                                    <Div Flex="Flex.Column.JustifyContent.Center">
+                                        @if (group.CategoryId is not null)
+                                        {
+                                            <h3>@_categories[(int)group.CategoryId].Name</h3>
+                                            <h5>@group.Title</h5>
+                                        }
+                                        else
+                                        {
+                                            <h3>@group.Title</h3>
+                                        }
+                                        @if (group.TagIds.Count > 0)
+                                        {
+                                            <Div Margin="Margin.Is1.OnY">
+                                                @foreach (int tagId in group.TagIds.OrderBy(t => t))
+                                                {
+                                                    <Badge Color="Color.Info">@_tags[tagId].Content</Badge>
+                                                }
+                                            </Div>
+                                        }
+                                    </Div>
+                                    <Div Margin="Margin.Is2.OnY">
+                                        @group.Intro
+                                    </Div>
+                                    <Div>
+                                        @if (group.IsLocked)
+                                        {
+                                            <Button Color="Color.Primary" Margin="Margin.Is2.FromTop" Disabled="@true">
+                                                Locked <Icon Name="IconName.Lock"></Icon>
+                                            </Button>
+                                        }
+                                        else
+                                        {
+                                            <Button Color="Color.Primary" Margin="Margin.Is2.FromTop">
+                                                Apply <Icon Name="IconName.Pen"></Icon>
+                                            </Button>
+                                        }
+                                    </Div>
+                                </Div>
+                            </ListGroupItem>
+                        }
+                    </ListGroup>
+                </CardBody>
+            </Card>
+        </Column>
+    </Row>
+}

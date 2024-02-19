@@ -1,21 +1,21 @@
-using System.ComponentModel;
 using UnityNexus.Shared.Extensions;
 
 namespace UnityNexus.Shared.Models
 {
     public class GroupModel
     {
-        private string _name;
+        private string _title;
         private string _intro;
+        private List<int> _tagIds;
 
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(255)]
-        public string Name
+        [MaxLength(60)]
+        public string Title
         {
-            get => _name;
-            set => _name = value.IfNotNull();
+            get => _title;
+            set => _title = value.IfNotNull();
         }
 
         [Required]
@@ -24,6 +24,12 @@ namespace UnityNexus.Shared.Models
         {
             get => _intro;
             set => _intro = value.IfNotNull();
+        }
+
+        public List<int> TagIds
+        {
+            get => _tagIds;
+            set => _tagIds = value.IfNotNull();
         }
 
         public Guid? UserId { get; set; }
@@ -36,7 +42,7 @@ namespace UnityNexus.Shared.Models
 
         public byte Position { get; set; }
 
-        private string? Image { get; set; }
+        public string? Image { get; set; }
 
         public DateTime? CreatedAt { get; }
 
@@ -49,8 +55,9 @@ namespace UnityNexus.Shared.Models
         public GroupModel()
         {
             Id = 0;
-            _name = string.Empty;
+            _title = string.Empty;
             _intro = string.Empty;
+            _tagIds = [];
             IsLocked = true;
             Position = 0;
         }
@@ -60,8 +67,9 @@ namespace UnityNexus.Shared.Models
             ArgumentNullException.ThrowIfNull(other);
 
             Id = other.Id;
-            Name = other.Name;
+            Title = other.Title;
             Intro = other.Intro;
+            TagIds = other.TagIds;
             IsLocked = other.IsLocked;
             Position = other.Position;
             Image = other.Image;

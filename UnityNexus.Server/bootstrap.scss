@@ -1,53 +1,11 @@
-@import "vendor/bootstrap/scss/functions";
-@import "vendor/bootstrap/scss/variables";
-@import "vendor/bootstrap/scss/mixins";
+$enable-gradients: false;
 
-/* Apply custom theme only when body contains "dark" class, also specifically target .modal and .card as the values are overwritten in bootstrap 5.2.3 */
-.dark, .dark .modal, .dark .card {
-
-    $enable-gradients: false;
-
-    /* Redefine theme colors for dark theme */
-    $primary: #F2D116;
-    $secondary: #648881;
-    $success: #32A647;
-    $dark: #2A2D3A;
-
-    $body-color: #E6E6E6;
-    $body-bg: #12151E;
-    $border-color: #2C2F3D;
-
-    $theme-colors: ( "primary": $primary, "secondary": $secondary, "success": $success, "danger": $danger, "info": $indigo, "dark": $dark, "light": #aaa, );
-
-    /* Redefine theme color variables */
-    @each $color, $value in $theme-colors {
-        --#{$variable-prefix}#{$color}: #{$value};
-    }
-
-    $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
-
-    @each $color, $value in $theme-colors-rgb {
-        --#{$variable-prefix}#{$color}-rgb: #{$value};
-    }
-    /* Set background color and contrasting text color */
-    --#{$variable-prefix}body-color: #{$body-color};
-    --#{$variable-prefix}modal-color: #{$body-color};
-    --#{$variable-prefix}card-color: #{$body-color};
-    --#{$variable-prefix}body-bg: #{$body-bg};
-    --#{$variable-prefix}modal-bg: #{$body-bg};
-    --#{$variable-prefix}card-bg: #{$body-bg};
-
-    /* Other customizations */
-    $border-radius: 0.5rem;
-
-    /* Overwrite modal border variables explicitly because they are not generated using --bs-border-color in bootstrap 5.2.3 */
-    --#{$variable-prefix}modal-header-border-color: #{$border-color};
-    --#{$variable-prefix}modal-content-border-color: #{$border-color};
-    --#{$variable-prefix}modal-footer-border-color: #{$border-color};
-    --#{$variable-prefix}card-border-color: #{$border-color};
-
-    /* Yep, same thing goes for border radius */
-    --#{$variable-prefix}card-border-radius: #{$border-radius};
-}
+$primary: #F2D116;
+$secondary: #648881;
+$success: #32A647;
+$info: #664AD9;
+$error: #D94A54;
+$body-bg-darl: #2A2D3A;
+$dark: #12151E;
 
 @import "vendor/bootstrap/scss/bootstrap";

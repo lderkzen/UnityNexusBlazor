@@ -16,6 +16,9 @@
         [Column("owner_id")]
         public Guid? OwnerId { get; set; }
 
+        [Column("title")]
+        public required string Title { get; set; }
+
         [Column("intro")]
         public required string Intro { get; set; }
 
