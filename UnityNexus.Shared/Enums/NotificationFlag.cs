@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Shared.Enums
 {
-    public enum NotificationFlag : ushort
+    public enum NotificationFlag : short
     {
         Unconfigured = 0,
         Important = 1,

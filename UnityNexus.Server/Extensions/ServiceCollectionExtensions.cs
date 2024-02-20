@@ -1,3 +1,4 @@
+using UnityNexus.Server.Shared;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 namespace UnityNexus.Server.Extensions
@@ -58,6 +59,7 @@ namespace UnityNexus.Server.Extensions
         internal static IServiceCollection AddStores(this IServiceCollection services)
         {
             services.AddScoped<IGroupStore, GroupStore>();
+            services.AddScoped<ITagStore, TagStore>();
 
             return services;
         }

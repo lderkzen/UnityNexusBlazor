@@ -2,37 +2,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UnityNexus.Server.Shared.Models
 {
-    [Table("questions")]
-    [Index(nameof(FormId), nameof(Position))]
-    public partial class Question
+    [Table("submission")]
+    [Index(nameof(ApplicantId))]
+    [Index(nameof(Status))]
+    public partial class Submission : ISoftDeletableModel
     {
-        public Question()
+        public Submission()
         {
-            QuestionId = QuestionId.From(0);
+            SubmissionId = SubmissionId.From(0);
             FormId = FormId.From(0);
-            Content = string.Empty;
 
             Answers = new HashSet<Answer>();
         }
 
         [Key]
-        [Column("question_id")]
-        public QuestionId QuestionId { get; set; }
+        [Column("submission_id")]
+        public SubmissionId SubmissionId { get; set; }
 
         [Column("form_id")]
         public FormId FormId { get; set; }
 
-        [Column("content")]
-        public string Content { get; set; }
+        [Column("applicant_id")]
+        public required UserId ApplicantId { get; set; }
+        
+        [Column("status")]
+        public SubmissionStatus Status { get; set; }
 
-        [Column("answer_type")]
-        public AnswerType AnswerType { get; set; }
-
-        [Column("required")]
-        public bool IsRequired { get; set; }
-
-        [Column("position")]
-        public short Position { get; set; }
+        [Column("visibility_level")]
+        public VisibilityLevel VisibilityLevel { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }

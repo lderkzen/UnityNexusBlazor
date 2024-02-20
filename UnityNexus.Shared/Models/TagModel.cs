@@ -5,8 +5,8 @@ namespace UnityNexus.Shared.Models
     public class TagModel
     {
         private string _content;
-        
-        public int Id { get; set; }
+
+        public TagId TagId { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -18,7 +18,7 @@ namespace UnityNexus.Shared.Models
 
         public TagModel()
         {
-            Id = 0;
+            TagId = TagId.From(0);
             _content = string.Empty;
         }
 
@@ -26,7 +26,7 @@ namespace UnityNexus.Shared.Models
         {
             ArgumentNullException.ThrowIfNull(other);
 
-            Id = other.Id;
+            TagId = other.TagId;
             Content = other.Content;
         }
     }

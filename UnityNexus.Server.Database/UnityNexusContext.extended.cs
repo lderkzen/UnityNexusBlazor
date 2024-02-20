@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage;
-
-namespace UnityNexus.Server.Database
+﻿namespace UnityNexus.Server.Database
 {
     public partial class UnityNexusContext
     {
@@ -43,15 +40,27 @@ namespace UnityNexus.Server.Database
         }
 
         private static IReadOnlyDictionary<Type, ValueConverter> GetConverter() =>
-           new Dictionary<Type, ValueConverter>
-           {
-               { typeof(AnswerType), new EnumToNumberConverter<AnswerType, byte>() },
-               { typeof(NotifiableType), new EnumToNumberConverter<NotifiableType, byte>() },
-               { typeof(NotificationFlag), new EnumToNumberConverter<NotificationFlag, byte>() },
-               { typeof(RemoteChannelType), new EnumToNumberConverter<RemoteChannelType, byte>() },
-               { typeof(SubmissionStatus), new EnumToNumberConverter<SubmissionStatus, byte>() },
-               { typeof(VisibilityLevel), new EnumToNumberConverter<VisibilityLevel, byte>() }
-           };
+            new Dictionary<Type, ValueConverter>
+            {
+                { typeof(AnswerId), new AnswerId.EfCoreValueConverter() },
+                { typeof(CategoryId), new CategoryId.EfCoreValueConverter() },
+                { typeof(ChannelId), new ChannelId.EfCoreValueConverter() },
+                { typeof(FormId), new FormId.EfCoreValueConverter() },
+                { typeof(GroupId), new GroupId.EfCoreValueConverter() },
+                { typeof(QuestionId), new QuestionId.EfCoreValueConverter() },
+                { typeof(RoleId), new RoleId.EfCoreValueConverter() },
+                { typeof(SubmissionId), new SubmissionId.EfCoreValueConverter() },
+                { typeof(TagId), new TagId.EfCoreValueConverter() },
+                { typeof(UserId), new UserId.EfCoreValueConverter() },
+                { typeof(AnswerType), new EnumToNumberConverter<AnswerType, byte>() },
+                { typeof(CategoryType), new EnumToNumberConverter<CategoryType, byte>() },
+                { typeof(GroupType), new EnumToNumberConverter<GroupType, byte>() },
+                { typeof(NotifiableType), new EnumToNumberConverter<NotifiableType, byte>() },
+                { typeof(NotificationFlag), new EnumToNumberConverter<NotificationFlag, short>() },
+                { typeof(RemoteChannelType), new EnumToNumberConverter<RemoteChannelType, byte>() },
+                { typeof(SubmissionStatus), new EnumToNumberConverter<SubmissionStatus, byte>() },
+                { typeof(VisibilityLevel), new EnumToNumberConverter<VisibilityLevel, byte>() }
+            };
 
         public async Task Transactional(Func<Task> act)
         {

@@ -42,7 +42,7 @@ namespace UnityNexus.Client.Pages
                 1,
                 new TagModel
                 {
-                    Id = 1,
+                    TagId = 1,
                     Content = "Min. 25 hrs weekly"
                 }
             );
@@ -50,11 +50,12 @@ namespace UnityNexus.Client.Pages
                 2,
                 new TagModel
                 {
-                    Id = 2,
+                    TagId = 2,
                     Content = "Event participation mandatory"
                 }
             );
-            _groups.Add(new GroupModel {
+            _groups.Add(new GroupModel
+            {
                 Id = 1,
                 CategoryId = 1,
                 Title = "Member",

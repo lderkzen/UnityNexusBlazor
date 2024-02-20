@@ -10,7 +10,7 @@ namespace UnityNexus.Client.Components
 
         [Parameter]
         public int? GroupId { get; set; }
-        
+
         [Parameter]
         public GroupModel? Model { get; set; }
 
@@ -57,7 +57,7 @@ namespace UnityNexus.Client.Components
                 1,
                 new TagModel
                 {
-                    Id = 1,
+                    TagId = 1,
                     Content = "Min. 25 hrs weekly"
                 }
             );
@@ -65,12 +65,12 @@ namespace UnityNexus.Client.Components
                 2,
                 new TagModel
                 {
-                    Id = 2,
+                    TagId = 2,
                     Content = "Event participation mandatory"
                 }
             );
             _groups.Add(
-                1, 
+                1,
                 new GroupModel
                 {
                     Id = 1,

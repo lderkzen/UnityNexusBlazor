@@ -7,7 +7,7 @@ namespace UnityNexus.Server.Shared
         {
             CategoryId = CategoryId.From(0);
             CategoryTypeId = CategoryType.Undefined;
-            CategoryName = string.Empty;
+            Name = string.Empty;
 
             Groups = new HashSet<Group>();
         }
@@ -17,10 +17,10 @@ namespace UnityNexus.Server.Shared
         public CategoryId CategoryId { get; set; }
 
         [Column("category_type_id")]
-        public UnityNexus.Shared.Enums.CategoryType CategoryTypeId { get; set; }
+        public CategoryType CategoryTypeId { get; set; }
 
-        [Column("category_name")]
-        public string CategoryName { get; set; }
+        [Column("name")]
+        public string Name { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
     }

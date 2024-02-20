@@ -51,6 +51,7 @@ global using UnityNexus.Shared.Auth;
 global using UnityNexus.Shared.Models;
 global using UnityNexus.Shared.Models.Requests;
 global using UnityNexus.Shared.Models.Responses;
+global using UnityNexus.Shared.ValueObjects;
 global using UnityNexus.Server.Components;
 global using UnityNexus.Server.Database;
 global using UnityNexus.Server.Extensions;

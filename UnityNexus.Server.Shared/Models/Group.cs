@@ -1,6 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace UnityNexus.Server.Shared.Models
 {
     [Table("groups")]
+    [Index(nameof(Position))]
     public abstract partial class Group : ISoftDeletableModel
     {
         public Group()
@@ -21,6 +24,9 @@ namespace UnityNexus.Server.Shared.Models
 
         [Column("group_type")]
         public GroupType GroupType { get; set; }
+
+        [Column("category_id")]
+        public CategoryId? CategoryId { get; set; }
 
         [Column("owner_id")]
         public UserId? OwnerId { get; set; }
@@ -52,7 +58,7 @@ namespace UnityNexus.Server.Shared.Models
         public string? BannerPath { get; set; }
 
         [Column("created_at")]
-        public required DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [Column("updated_at")]
         public DateTime? UpdatedAt { get; set; }
