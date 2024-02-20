@@ -1,9 +1,8 @@
 namespace UnityNexus.Server.Shared.Models
 {
+    [Table("groups")]
     public abstract partial class Group : ISoftDeletableModel
     {
-        public abstract GroupType GroupType { get; }
-
         public Group()
         {
             GroupId = GroupId.From(0);
@@ -13,11 +12,15 @@ namespace UnityNexus.Server.Shared.Models
 
             MemberIds = new HashSet<UserId>();
             Tags = new HashSet<Tag>();
+            Forms = new HashSet<Form>();
         }
 
         [Key]
         [Column("group_id")]
         public GroupId GroupId { get; set; }
+
+        [Column("group_type")]
+        public GroupType GroupType { get; set; }
 
         [Column("owner_id")]
         public UserId? OwnerId { get; set; }
@@ -60,5 +63,6 @@ namespace UnityNexus.Server.Shared.Models
         public virtual Category? Category { get; set; }
         public virtual ICollection<UserId> MemberIds { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Form> Forms { get; set; }
     }
 }

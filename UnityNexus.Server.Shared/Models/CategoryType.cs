@@ -7,8 +7,6 @@ namespace UnityNexus.Server.Shared.Models
         {
             CategoryTypeId = UnityNexus.Shared.Enums.CategoryType.Undefined;
             Name = string.Empty;
-
-            Groups = new HashSet<Group>();
         }
 
         [Key]
@@ -17,7 +15,5 @@ namespace UnityNexus.Server.Shared.Models
         
         [Column("name")]
         public string Name { get; set; }
-
-        public virtual ICollection<Group> Groups { get; set; }
     }
 }

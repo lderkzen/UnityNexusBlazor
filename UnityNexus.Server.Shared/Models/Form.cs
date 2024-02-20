@@ -6,6 +6,8 @@ namespace UnityNexus.Server.Shared.Models
         public Form()
         {
             FormId = FormId.From(0);
+
+            Questions = new HashSet<Question>();
         }
 
         [Key]
@@ -13,5 +15,6 @@ namespace UnityNexus.Server.Shared.Models
         public FormId FormId { get; set; }
 
         public virtual Group? Group { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }
