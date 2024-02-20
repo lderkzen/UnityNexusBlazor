@@ -17,12 +17,7 @@ namespace UnityNexus.Server.Stores
 
         private async Task<Exception?> UpdateEntriesInternalAsync(IReadOnlyDictionary<string, string?> entries)
         {
-            try
-            {
-                var configurationEntries = await _unityNexusContext
-                    .ConfigurationEntry
-                    
-            }
+            throw new NotImplementedException();
         }
 
         public Task<Dictionary<string, string?>> LoadEntriesAsync()

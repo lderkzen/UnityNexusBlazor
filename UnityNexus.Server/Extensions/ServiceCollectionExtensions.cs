@@ -41,6 +41,9 @@ namespace UnityNexus.Server.Extensions
                     DotEnv.Generated.DatabaseEnvironment.UnityNexusDbPassword,
                     DotEnv.Generated.DatabaseEnvironment.UnityNexusDbName
                 ));
+#if DEBUG
+                options.EnableSensitiveDataLogging();
+#endif
             });
 
             return services;

@@ -6,5 +6,6 @@ global using System.Reflection;
 global using System.Text.Json.Serialization;
 global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Authorization;
+global using Vogen;
 global using UnityNexus.Shared.Enums;
 global using UnityNexus.Shared.Interfaces;

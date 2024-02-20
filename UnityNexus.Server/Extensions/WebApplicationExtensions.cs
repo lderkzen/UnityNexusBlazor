@@ -22,7 +22,7 @@
                 app.UseHsts();
             }
 
-            app.UseSecurityHeaders(collection => collection.Configure(app.Environment.IsDevelopment()));
+            // app.UseSecurityHeaders(collection => collection.Configure(app.Environment.IsDevelopment()));
 
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
@@ -40,6 +40,8 @@
             }
 
             app.UseRouting();
+
+            return app;
         }
     }
 }
