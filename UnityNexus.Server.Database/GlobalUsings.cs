@@ -8,7 +8,7 @@ global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 global using Microsoft.EntityFrameworkCore.ValueGeneration;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
-global using UnityNexus.Server.Shared.Entities;
+global using UnityNexus.Server.Shared.Models;
 global using UnityNexus.Shared.Enums;
 global using UnityNexus.Shared.Models;
 global using UnityNexus.Shared.ValueObjects;

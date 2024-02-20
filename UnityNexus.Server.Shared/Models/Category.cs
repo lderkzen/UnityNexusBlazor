@@ -1,4 +1,4 @@
-namespace UnityNexus.Server.Shared
+namespace UnityNexus.Server.Shared.Models
 {
     [Table("categories")]
     public partial class Category

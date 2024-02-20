@@ -45,7 +45,7 @@ global using Serilog.Exceptions;
 global using Serilog.Exceptions.Core;
 global using Serilog.Exceptions.Destructurers;
 global using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
-global using UnityNexus.Server.Shared.Entities;
+global using UnityNexus.Server.Shared.Models;
 global using UnityNexus.Server.Shared.Stores;
 global using UnityNexus.Shared.Auth;
 global using UnityNexus.Shared.Models;

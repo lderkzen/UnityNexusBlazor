@@ -4,18 +4,18 @@ namespace UnityNexus.Shared.Models
 {
     public class GroupModel
     {
-        private string _title;
+        private string _name;
         private string _intro;
-        private List<int> _tagIds;
+        private List<TagId> _tagIds;
 
-        public int Id { get; set; }
+        public GroupId GroupId { get; set; }
 
         [Required]
         [MaxLength(60)]
-        public string Title
+        public string Name
         {
-            get => _title;
-            set => _title = value.IfNotNull();
+            get => _name;
+            set => _name = value.IfNotNull();
         }
 
         [Required]
@@ -26,7 +26,7 @@ namespace UnityNexus.Shared.Models
             set => _intro = value.IfNotNull();
         }
 
-        public List<int> TagIds
+        public List<TagId> TagIds
         {
             get => _tagIds;
             set => _tagIds = value.IfNotNull();
@@ -34,7 +34,7 @@ namespace UnityNexus.Shared.Models
 
         public Guid? UserId { get; set; }
 
-        public int? CategoryId { get; set; }
+        public CategoryId? CategoryId { get; set; }
         
         public string? NotificationChannelId { get; set; }
 
@@ -54,8 +54,8 @@ namespace UnityNexus.Shared.Models
 
         public GroupModel()
         {
-            Id = 0;
-            _title = string.Empty;
+            GroupId = GroupId.From(0);
+            _name = string.Empty;
             _intro = string.Empty;
             _tagIds = [];
             IsLocked = true;
@@ -66,8 +66,8 @@ namespace UnityNexus.Shared.Models
         {
             ArgumentNullException.ThrowIfNull(other);
 
-            Id = other.Id;
-            Title = other.Title;
+            GroupId = other.GroupId;
+            Name = other.Name;
             Intro = other.Intro;
             TagIds = other.TagIds;
             IsLocked = other.IsLocked;

@@ -34,13 +34,22 @@
                                 <DataGridCancelCommand TItem="GroupModel" CommandContext="@context" />
                             </CancelCommandTemplate>
                         </DataGridCommandColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Id)" Caption="Id"></DataGridColumn>
+                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.GroupId)" Caption="Id">
+                            <DisplayTemplate>
+                                @{
+                                    if (context is GroupModel model)
+                                    {
+                                        @((int)context.GroupId)
+                                    }
+                                }
+                            </DisplayTemplate>
+                        </DataGridColumn>
                         <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.CategoryId)" Caption="Category">
                             <DisplayTemplate>
                                 @{
                                     if (context is GroupModel model && model.CategoryId is not null)
                                     {
-                                        @_categories[(int)model.CategoryId].Name
+                                        @_categories[model.CategoryId].Name
                                     }
                                     else
                                     {
@@ -49,7 +58,7 @@
                                 }
                             </DisplayTemplate>
                         </DataGridColumn>
-                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Title"></DataGridColumn>
+                        <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Name)" Caption="Name"></DataGridColumn>
                         <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.NotificationChannelId)"
                             Caption="Notification Channel">
                             <DisplayTemplate>

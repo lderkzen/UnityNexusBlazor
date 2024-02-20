@@ -1,11 +1,4 @@
-﻿using UnityNexus.Server.Shared.Models;
-using Answer = UnityNexus.Server.Shared.Entities.Answer;
-using Form = UnityNexus.Server.Shared.Entities.Form;
-using Group = UnityNexus.Server.Shared.Entities.Group;
-using Question = UnityNexus.Server.Shared.Entities.Question;
-using Submission = UnityNexus.Server.Shared.Entities.Submission;
-
-namespace UnityNexus.Server.Database
+﻿namespace UnityNexus.Server.Database
 {
     public partial class UnityNexusContext : DbContext
     {

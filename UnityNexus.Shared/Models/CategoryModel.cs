@@ -5,9 +5,9 @@ namespace UnityNexus.Shared.Models
     public class CategoryModel
     {
         private string _name;
-        private List<int> _groupIds;
-        
-        public int Id { get; set; }
+        private List<GroupId> _groupIds;
+
+        public CategoryId CategoryId { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -17,7 +17,7 @@ namespace UnityNexus.Shared.Models
             set => _name = value.IfNotNull();
         }
 
-        public List<int> GroupIds
+        public List<GroupId> GroupIds
         {
             get => _groupIds;
             set => _groupIds = value.IfNotNull();
@@ -29,7 +29,7 @@ namespace UnityNexus.Shared.Models
 
         public CategoryModel()
         {
-            Id = 0;
+            CategoryId = CategoryId.From(0);
             _name = string.Empty;
             _groupIds = [];
         }
@@ -38,7 +38,7 @@ namespace UnityNexus.Shared.Models
         {
             ArgumentNullException.ThrowIfNull(other);
 
-            Id = other.Id;
+            CategoryId = other.CategoryId;
             Name = other.Name;
             GroupIds = other.GroupIds;
         }

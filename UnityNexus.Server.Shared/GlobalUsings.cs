@@ -4,5 +4,5 @@ global using Riok.Mapperly.Abstractions;
 global using UnityNexus.Shared.Enums;
 global using UnityNexus.Shared.Models;
 global using UnityNexus.Shared.ValueObjects;
-global using UnityNexus.Server.Shared.Entities;
 global using UnityNexus.Server.Shared.Interfaces;
+global using UnityNexus.Server.Shared.Models;
