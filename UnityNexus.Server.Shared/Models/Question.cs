@@ -11,6 +11,7 @@ namespace UnityNexus.Server.Shared.Models
             QuestionId = QuestionId.From(0);
             FormId = FormId.From(0);
             Content = string.Empty;
+            AnswerTypeId = AnswerTypeId.Unspecified;
 
             Answers = new HashSet<Answer>();
         }
@@ -25,8 +26,8 @@ namespace UnityNexus.Server.Shared.Models
         [Column("content")]
         public string Content { get; set; }
 
-        [Column("answer_type")]
-        public AnswerType AnswerType { get; set; }
+        [Column("answer_type_id")]
+        public AnswerTypeId AnswerTypeId { get; set; }
 
         [Column("required")]
         public bool IsRequired { get; set; }
@@ -44,6 +45,7 @@ namespace UnityNexus.Server.Shared.Models
         public DateTime? DeletedAt { get; set; }
 
         public virtual Form Form { get; set; } = null!;
+        public virtual AnswerType AnswerType { get; set; } = null!;
         public virtual ICollection<Answer> Answers { get; set; }
     }
 }

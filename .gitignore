@@ -400,5 +400,8 @@ FodyWeavers.xsd
 # Ignore vendor folder
 UnityNexus.Server/vendor/*
 
+# Ignore generated files
+UnityNexus.Shared/Generated/*
+
 # Ignore local config
 .config/*

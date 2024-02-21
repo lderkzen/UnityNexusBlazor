@@ -2,7 +2,7 @@
 {
     public enum AnswerType : byte
     {
-        Unknown = 0,
+        Unspecified = 0,
         String = 1,
         Text = 2,
         Numeric = 3,
