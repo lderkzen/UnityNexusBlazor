@@ -22,8 +22,8 @@ namespace UnityNexus.Server.Shared.Models
         [Column("group_id")]
         public GroupId GroupId { get; set; }
 
-        [Column("group_type")]
-        public GroupType GroupType { get; set; }
+        [Column("group_type_id")]
+        public UnityNexus.Shared.Enums.GroupType GroupTypeId { get; set; }
 
         [Column("category_id")]
         public CategoryId? CategoryId { get; set; }
@@ -66,6 +66,7 @@ namespace UnityNexus.Server.Shared.Models
         [Column("deleted_at")]
         public DateTime? DeletedAt { get; set; }
 
+        public virtual GroupType GroupType { get; set; } = null!;
         public virtual Category? Category { get; set; }
         public virtual ICollection<UserId> MemberIds { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }

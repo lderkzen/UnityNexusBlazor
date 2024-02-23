@@ -7,6 +7,7 @@
             IReadOnlyDictionary<Type, ValueConverter> converter = GetConverter();
 
             SpecifyAllDateTimeValuesAsUTC(modelBuilder);
+            SeedLookupTableData(modelBuilder);
         }
 
         private static void SpecifyAllDateTimeValuesAsUTC(ModelBuilder modelBuilder)
@@ -54,10 +55,10 @@
                 { typeof(UserId), new UserId.EfCoreValueConverter() },
                 { typeof(NotifiableType), new EnumToNumberConverter<NotifiableType, byte>() },
                 { typeof(NotificationFlag), new EnumToNumberConverter<NotificationFlag, short>() },
+                { typeof(ChannelType), new EnumToNumberConverter<ChannelType, byte>() },
                 { typeof(UnityNexus.Shared.Enums.AnswerType), new EnumToNumberConverter<UnityNexus.Shared.Enums.AnswerType, byte>() },
                 { typeof(UnityNexus.Shared.Enums.CategoryType), new EnumToNumberConverter<UnityNexus.Shared.Enums.CategoryType, byte>() },
                 { typeof(UnityNexus.Shared.Enums.GroupType), new EnumToNumberConverter<UnityNexus.Shared.Enums.GroupType, byte>() },
-                { typeof(UnityNexus.Shared.Enums.RemoteChannelType), new EnumToNumberConverter<UnityNexus.Shared.Enums.RemoteChannelType, byte>() },
                 { typeof(UnityNexus.Shared.Enums.SubmissionStatus), new EnumToNumberConverter<UnityNexus.Shared.Enums.SubmissionStatus, byte>() },
                 { typeof(UnityNexus.Shared.Enums.VisibilityLevel), new EnumToNumberConverter<UnityNexus.Shared.Enums.VisibilityLevel, byte>() }
             };
@@ -101,6 +102,7 @@
 
         public void SeedLookupTableData(ModelBuilder modelBuilder)
         {
+            short lastPosition = 0;
             modelBuilder
                 .Entity<Shared.Models.AnswerType>().HasData(
                     Enum.GetValues(typeof(UnityNexus.Shared.Enums.AnswerType))
@@ -108,9 +110,12 @@
                         .Select(e => new Shared.Models.AnswerType
                         {
                             AnswerTypeId = e,
-                            Name = e.ToString()
+                            Name = e.ToString(),
+                            Position = lastPosition++
                         })
                 );
+
+            lastPosition = 0;
             modelBuilder
                 .Entity<Shared.Models.CategoryType>().HasData(
                     Enum.GetValues(typeof(UnityNexus.Shared.Enums.CategoryType))
@@ -118,7 +123,47 @@
                         .Select(e => new Shared.Models.CategoryType
                         {
                             CategoryTypeId = e,
-                            Name = e.ToString()
+                            Name = e.ToString(),
+                            Position = lastPosition++
+                        })
+                );
+
+            lastPosition = 0;
+            modelBuilder
+                .Entity<Shared.Models.GroupType>().HasData(
+                    Enum.GetValues(typeof(UnityNexus.Shared.Enums.GroupType))
+                        .Cast<UnityNexus.Shared.Enums.GroupType>()
+                        .Select(e => new Shared.Models.GroupType
+                        {
+                            GroupTypeId = e,
+                            Name = e.ToString(),
+                            Position = lastPosition++
+                        })
+                );
+
+            lastPosition = 0;
+            modelBuilder
+                .Entity<Shared.Models.SubmissionStatus>().HasData(
+                    Enum.GetValues(typeof(UnityNexus.Shared.Enums.SubmissionStatus))
+                        .Cast<UnityNexus.Shared.Enums.SubmissionStatus>()
+                        .Select(e => new Shared.Models.SubmissionStatus
+                        {
+                            SubmissionStatusId = e,
+                            Name = e.ToString(),
+                            Position = lastPosition++
+                        })
+                );
+
+            lastPosition = 0;
+            modelBuilder
+                .Entity<Shared.Models.VisibilityLevel>().HasData(
+                    Enum.GetValues(typeof(UnityNexus.Shared.Enums.VisibilityLevel))
+                        .Cast<UnityNexus.Shared.Enums.VisibilityLevel>()
+                        .Select(e => new Shared.Models.VisibilityLevel
+                        {
+                            VisibilityLevelId = e,
+                            Name = e.ToString(),
+                            Position = lastPosition++
                         })
                 );
         }

@@ -26,7 +26,7 @@ namespace UnityNexus.Server.Shared.Models
         public string Content { get; set; }
 
         [Column("answer_type_id")]
-        public byte AnswerTypeId { get; set; }
+        public UnityNexus.Shared.Enums.AnswerType AnswerTypeId { get; set; }
 
         [Column("required")]
         public bool IsRequired { get; set; }

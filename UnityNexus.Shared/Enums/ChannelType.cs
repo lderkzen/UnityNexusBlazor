@@ -1,6 +1,6 @@
 ﻿namespace UnityNexus.Shared.Enums
 {
-    public enum RemoteChannelType : byte
+    public enum ChannelType : byte
     {
         Unknown = 0
     }

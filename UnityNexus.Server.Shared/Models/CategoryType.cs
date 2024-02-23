@@ -19,6 +19,6 @@ namespace UnityNexus.Server.Shared.Models
         [Column("position")]
         public short Position { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

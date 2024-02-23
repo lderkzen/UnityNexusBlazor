@@ -16,7 +16,7 @@ namespace UnityNexus.Server.Shared.Models
         public CategoryId CategoryId { get; set; }
 
         [Column("category_type_id")]
-        public byte CategoryTypeId { get; set; }
+        public UnityNexus.Shared.Enums.CategoryType CategoryTypeId { get; set; }
 
         [Column("name")]
         public string Name { get; set; }

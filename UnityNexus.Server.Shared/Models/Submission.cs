@@ -4,7 +4,7 @@ namespace UnityNexus.Server.Shared.Models
 {
     [Table("submission")]
     [Index(nameof(ApplicantId))]
-    [Index(nameof(Status))]
+    [Index(nameof(SubmissionStatusId))]
     public partial class Submission : ISoftDeletableModel
     {
         public Submission()
@@ -25,11 +25,11 @@ namespace UnityNexus.Server.Shared.Models
         [Column("applicant_id")]
         public required UserId ApplicantId { get; set; }
         
-        [Column("status")]
-        public SubmissionStatus Status { get; set; }
+        [Column("submission_status_id")]
+        public UnityNexus.Shared.Enums.SubmissionStatus SubmissionStatusId { get; set; }
 
-        [Column("visibility_level")]
-        public VisibilityLevel VisibilityLevel { get; set; }
+        [Column("visibility_level_id")]
+        public UnityNexus.Shared.Enums.VisibilityLevel VisibilityLevelId { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
@@ -40,6 +40,8 @@ namespace UnityNexus.Server.Shared.Models
         [Column("deleted_at")]
         public DateTime? DeletedAt { get; set; }
 
+        public virtual SubmissionStatus SubmissionStatus { get; set; } = null!;
+        public virtual VisibilityLevel VisibilityLevel { get; set; } = null!;
         public virtual Form Form { get; set; } = null!;
         public virtual ICollection<Answer> Answers { get; set; }
     }
