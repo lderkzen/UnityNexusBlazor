@@ -3,12 +3,15 @@
     public partial class UnityNexusContext : DbContext
     {
         public DbSet<Answer> Answers { get; set; } = null!;
+        public DbSet<Shared.Models.AnswerType> AnswerTypes { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Shared.Models.CategoryType> CategoryTypes { get; set; } = null!;
         public DbSet<Form> Forms { get; set; } = null!;
         public DbSet<Group> Groups { get; set; } = null!;
         public DbSet<Question> Questions { get; set; } = null!;
         public DbSet<Submission> Submissions { get; set; } = null!;
         public DbSet<Tag> Tags { get; set; } = null!;
+        public DbSet<UserNotificationSettings> UserNotificationSettings { get; set; } = null!;
 
         public UnityNexusContext(DbContextOptions<UnityNexusContext> options): base(options)
         {

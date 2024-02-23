@@ -11,7 +11,6 @@ namespace UnityNexus.Server.Shared.Models
             QuestionId = QuestionId.From(0);
             FormId = FormId.From(0);
             Content = string.Empty;
-            AnswerTypeId = AnswerTypeId.Unspecified;
 
             Answers = new HashSet<Answer>();
         }
@@ -27,7 +26,7 @@ namespace UnityNexus.Server.Shared.Models
         public string Content { get; set; }
 
         [Column("answer_type_id")]
-        public AnswerTypeId AnswerTypeId { get; set; }
+        public byte AnswerTypeId { get; set; }
 
         [Column("required")]
         public bool IsRequired { get; set; }

@@ -6,7 +6,6 @@ namespace UnityNexus.Server.Shared.Models
         public Category()
         {
             CategoryId = CategoryId.From(0);
-            CategoryTypeId = CategoryType.Undefined;
             Name = string.Empty;
 
             Groups = new HashSet<Group>();
@@ -17,11 +16,12 @@ namespace UnityNexus.Server.Shared.Models
         public CategoryId CategoryId { get; set; }
 
         [Column("category_type_id")]
-        public CategoryType CategoryTypeId { get; set; }
+        public byte CategoryTypeId { get; set; }
 
         [Column("name")]
         public string Name { get; set; }
 
+        public virtual CategoryType CategoryType { get; set; } = null!;
         public virtual ICollection<Group> Groups { get; set; }
     }
 }

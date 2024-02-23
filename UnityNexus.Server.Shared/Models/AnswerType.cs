@@ -5,7 +5,7 @@ namespace UnityNexus.Server.Shared.Models
     {
         public AnswerType()
         {
-            AnswerTypeId = AnswerTypeId.Unspecified;
+            AnswerTypeId = UnityNexus.Shared.Enums.AnswerType.Unspecified;
             Name = string.Empty;
 
             Questions = new HashSet<Question>();
@@ -13,7 +13,7 @@ namespace UnityNexus.Server.Shared.Models
 
         [Key]
         [Column("answer_type_id")]
-        public AnswerTypeId AnswerTypeId { get; set; }
+        public UnityNexus.Shared.Enums.AnswerType AnswerTypeId { get; set; }
 
         [Column("name")]
         public string Name { get; set; }

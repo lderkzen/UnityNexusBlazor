@@ -52,14 +52,14 @@
                 { typeof(SubmissionId), new SubmissionId.EfCoreValueConverter() },
                 { typeof(TagId), new TagId.EfCoreValueConverter() },
                 { typeof(UserId), new UserId.EfCoreValueConverter() },
-                { typeof(AnswerType), new EnumToNumberConverter<AnswerType, byte>() },
-                { typeof(CategoryType), new EnumToNumberConverter<CategoryType, byte>() },
-                { typeof(GroupType), new EnumToNumberConverter<GroupType, byte>() },
                 { typeof(NotifiableType), new EnumToNumberConverter<NotifiableType, byte>() },
                 { typeof(NotificationFlag), new EnumToNumberConverter<NotificationFlag, short>() },
-                { typeof(RemoteChannelType), new EnumToNumberConverter<RemoteChannelType, byte>() },
-                { typeof(SubmissionStatus), new EnumToNumberConverter<SubmissionStatus, byte>() },
-                { typeof(VisibilityLevel), new EnumToNumberConverter<VisibilityLevel, byte>() }
+                { typeof(UnityNexus.Shared.Enums.AnswerType), new EnumToNumberConverter<UnityNexus.Shared.Enums.AnswerType, byte>() },
+                { typeof(UnityNexus.Shared.Enums.CategoryType), new EnumToNumberConverter<UnityNexus.Shared.Enums.CategoryType, byte>() },
+                { typeof(UnityNexus.Shared.Enums.GroupType), new EnumToNumberConverter<UnityNexus.Shared.Enums.GroupType, byte>() },
+                { typeof(UnityNexus.Shared.Enums.RemoteChannelType), new EnumToNumberConverter<UnityNexus.Shared.Enums.RemoteChannelType, byte>() },
+                { typeof(UnityNexus.Shared.Enums.SubmissionStatus), new EnumToNumberConverter<UnityNexus.Shared.Enums.SubmissionStatus, byte>() },
+                { typeof(UnityNexus.Shared.Enums.VisibilityLevel), new EnumToNumberConverter<UnityNexus.Shared.Enums.VisibilityLevel, byte>() }
             };
 
         public async Task Transactional(Func<Task> act)
@@ -97,6 +97,30 @@
 
                 throw;
             }
+        }
+
+        public void SeedLookupTableData(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Shared.Models.AnswerType>().HasData(
+                    Enum.GetValues(typeof(UnityNexus.Shared.Enums.AnswerType))
+                        .Cast<UnityNexus.Shared.Enums.AnswerType>()
+                        .Select(e => new Shared.Models.AnswerType
+                        {
+                            AnswerTypeId = e,
+                            Name = e.ToString()
+                        })
+                );
+            modelBuilder
+                .Entity<Shared.Models.CategoryType>().HasData(
+                    Enum.GetValues(typeof(UnityNexus.Shared.Enums.CategoryType))
+                        .Cast<UnityNexus.Shared.Enums.CategoryType>()
+                        .Select(e => new Shared.Models.CategoryType
+                        {
+                            CategoryTypeId = e,
+                            Name = e.ToString()
+                        })
+                );
         }
     }
 }

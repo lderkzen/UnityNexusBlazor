@@ -2,7 +2,8 @@ namespace UnityNexus.Shared.Enums
 {
     public enum GroupType : byte
     {
-        Closed = 0,
-        Open = 1
+        Unspecified = 0,
+        Closed = 1,
+        Open = 2
     }
 }
