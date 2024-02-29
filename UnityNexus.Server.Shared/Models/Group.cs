@@ -10,7 +10,7 @@ namespace UnityNexus.Server.Shared.Models
         {
             GroupId = GroupId.From(0);
             ChannelId = ChannelId.From(string.Empty);
-            GroupName = string.Empty;
+            Name = string.Empty;
             Intro = string.Empty;
 
             MemberIds = new HashSet<UserId>();
@@ -31,15 +31,12 @@ namespace UnityNexus.Server.Shared.Models
         [Column("owner_id")]
         public UserId? OwnerId { get; set; }
 
-        [Column("parent_group_id")]
-        public GroupId? ParentGroupId { get; set; }
-
         [Column("channel_id")]
         public ChannelId ChannelId { get; set; }
 
         [MaxLength(255)]
-        [Column("group_name")]
-        public string GroupName { get; set; }
+        [Column("name")]
+        public string Name { get; set; }
 
         [MaxLength(1000)]
         [Column("intro")]

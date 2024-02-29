@@ -1,5 +1,3 @@
-using UnityNexus.Shared.Extensions;
-
 namespace UnityNexus.Shared.Models
 {
     public class CategoryModel
@@ -8,6 +6,8 @@ namespace UnityNexus.Shared.Models
         private List<GroupId> _groupIds;
 
         public CategoryId CategoryId { get; set; }
+
+        public CategoryTypeModel CategoryType { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -30,6 +30,7 @@ namespace UnityNexus.Shared.Models
         public CategoryModel()
         {
             CategoryId = CategoryId.From(0);
+            CategoryType = new CategoryTypeModel();
             _name = string.Empty;
             _groupIds = [];
         }

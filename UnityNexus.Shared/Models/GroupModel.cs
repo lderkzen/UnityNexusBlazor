@@ -1,5 +1,3 @@
-using UnityNexus.Shared.Extensions;
-
 namespace UnityNexus.Shared.Models
 {
     public class GroupModel
@@ -9,6 +7,8 @@ namespace UnityNexus.Shared.Models
         private List<TagId> _tagIds;
 
         public GroupId GroupId { get; set; }
+        
+        public GroupTypeModel GroupType { get; set; }
 
         [Required]
         [MaxLength(60)]
@@ -32,9 +32,9 @@ namespace UnityNexus.Shared.Models
             set => _tagIds = value.IfNotNull();
         }
 
-        public Guid? UserId { get; set; }
+        public UserId? UserId { get; set; }
 
-        public CategoryId? CategoryId { get; set; }
+        public CategoryModel? Category { get; set; }
         
         public string? NotificationChannelId { get; set; }
 
@@ -42,11 +42,13 @@ namespace UnityNexus.Shared.Models
 
         public byte Position { get; set; }
 
-        public string? Image { get; set; }
+        public string? LogoPath { get; set; }
+
+        public string? BannerPath { get; set; }
 
         public DateTime? CreatedAt { get; }
 
-        public DateTime? UpdatedAt { get; }
+        public DateTime? UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; }
 
@@ -55,6 +57,7 @@ namespace UnityNexus.Shared.Models
         public GroupModel()
         {
             GroupId = GroupId.From(0);
+            GroupType = new GroupTypeModel();
             _name = string.Empty;
             _intro = string.Empty;
             _tagIds = [];
@@ -67,12 +70,17 @@ namespace UnityNexus.Shared.Models
             ArgumentNullException.ThrowIfNull(other);
 
             GroupId = other.GroupId;
+            GroupType = other.GroupType;
             Name = other.Name;
             Intro = other.Intro;
             TagIds = other.TagIds;
+            Category = other.Category;
+            NotificationChannelId = other.NotificationChannelId;
             IsLocked = other.IsLocked;
             Position = other.Position;
-            Image = other.Image;
+            LogoPath = other.LogoPath;
+            BannerPath = other.BannerPath;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

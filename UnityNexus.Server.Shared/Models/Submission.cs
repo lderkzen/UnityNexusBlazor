@@ -11,6 +11,7 @@ namespace UnityNexus.Server.Shared.Models
         {
             SubmissionId = SubmissionId.From(0);
             FormId = FormId.From(0);
+            ApplicantId = (UserId)Guid.Empty;
 
             Answers = new HashSet<Answer>();
         }
@@ -23,7 +24,7 @@ namespace UnityNexus.Server.Shared.Models
         public FormId FormId { get; set; }
 
         [Column("applicant_id")]
-        public required UserId ApplicantId { get; set; }
+        public UserId ApplicantId { get; set; }
         
         [Column("submission_status_id")]
         public UnityNexus.Shared.Enums.SubmissionStatus SubmissionStatusId { get; set; }

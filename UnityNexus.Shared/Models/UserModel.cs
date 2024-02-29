@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace UnityNexus.Shared.Models
 {
     public class UserModel

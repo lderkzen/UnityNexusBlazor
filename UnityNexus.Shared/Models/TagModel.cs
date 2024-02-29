@@ -1,5 +1,3 @@
-using UnityNexus.Shared.Extensions;
-
 namespace UnityNexus.Shared.Models
 {
     public class TagModel
