@@ -17,28 +17,28 @@ else
             <Card>
                 <CardBody>
                     <ListGroup Flush="true">
-                        @foreach (GroupModel group in _groups.OrderBy(g => g.Position).ThenBy(g => g.CategoryId).ThenBy(g =>g.Title))
+                        @foreach (GroupModel group in _groups.OrderBy(g => g.Position).ThenBy(g => g.Category?.CategoryId).ThenBy(g =>g.Name))
                         {
                             <ListGroupItem Flex="Flex.Row.AlignItems.Center" Padding="Padding.Is4.OnY">
-                                @if (!string.IsNullOrEmpty(group.Image))
+                                @if (!string.IsNullOrEmpty(group.LogoPath))
                                 {
-                                    <Image Source="@group.Image" Alt="Group Logo" Style="width: 200px; height: 200px;"></Image>
+                                    <Image Source="@group.LogoPath" Alt="Group Logo" Style="width: 200px; height: 200px;"></Image>
                                 }
                                 <Div Flex="Flex.Column.JustifyContent.Around">
                                     <Div Flex="Flex.Column.JustifyContent.Center">
-                                        @if (group.CategoryId is not null)
+                                        @if (group.Category is not null)
                                         {
-                                            <h3>@_categories[(int)group.CategoryId].Name</h3>
-                                            <h5>@group.Title</h5>
+                                            <h3>@group.Category.Name</h3>
+                                            <h5>@group.Name</h5>
                                         }
                                         else
                                         {
-                                            <h3>@group.Title</h3>
+                                            <h3>@group.Name</h3>
                                         }
                                         @if (group.TagIds.Count > 0)
                                         {
                                             <Div Margin="Margin.Is1.OnY">
-                                                @foreach (int tagId in group.TagIds.OrderBy(t => t))
+                                                @foreach (TagId tagId in group.TagIds.OrderBy(t => t))
                                                 {
                                                     <Badge Color="Color.Info" Margin="Margin.Is1">@_tags[tagId].Content</Badge>
                                                 }

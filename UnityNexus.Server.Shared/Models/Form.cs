@@ -1,7 +1,7 @@
 namespace UnityNexus.Server.Shared.Models
 {
     [Table("forms")]
-    public partial class Form : ISoftDeletableModel
+    public partial class Form : ICreatableModel, IUpdatableModel, ISoftDeletableModel
     {
         public Form()
         {
@@ -34,5 +34,15 @@ namespace UnityNexus.Server.Shared.Models
         public virtual Group? Group { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<Submission> Submissions { get; set; }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

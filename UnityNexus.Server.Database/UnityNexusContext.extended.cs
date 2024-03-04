@@ -4,7 +4,9 @@
     {
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
-            IReadOnlyDictionary<Type, ValueConverter> converter = GetConverter();
+            IReadOnlyDictionary<Type, ValueConverter> converters = GetConverter();
+
+            ConvertModelProperties(modelBuilder, converters);
 
             SpecifyAllDateTimeValuesAsUTC(modelBuilder);
             SeedLookupTableData(modelBuilder);
@@ -62,6 +64,120 @@
                 { typeof(UnityNexus.Shared.Enums.SubmissionStatus), new EnumToNumberConverter<UnityNexus.Shared.Enums.SubmissionStatus, byte>() },
                 { typeof(UnityNexus.Shared.Enums.VisibilityLevel), new EnumToNumberConverter<UnityNexus.Shared.Enums.VisibilityLevel, byte>() }
             };
+
+        private static void ConvertModelProperties(
+            ModelBuilder modelBuilder,
+            IReadOnlyDictionary<Type, ValueConverter> converters
+        )
+        {
+            modelBuilder.Entity<Answer>(builder =>
+            {
+                builder.Property(m => m.AnswerId)
+                    .HasConversion(converters[typeof(AnswerId)])
+                    .ValueGeneratedOnAdd();
+                builder.Property(m => m.PreviousAnswerId)
+                    .HasConversion(converters[typeof(AnswerId)]);
+                builder.Property(m => m.QuestionId)
+                    .HasConversion(converters[typeof(QuestionId)]);
+                builder.Property(m => m.SubmissionId)
+                    .HasConversion(converters[typeof(SubmissionId)]);
+            });
+            modelBuilder.Entity<Shared.Models.AnswerType>(builder =>
+            {
+                builder.Property(m => m.AnswerTypeId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.AnswerType)])
+                    .ValueGeneratedOnAdd();
+            });
+            modelBuilder.Entity<Category>(builder =>
+            {
+                builder.Property(m => m.CategoryId)
+                    .HasConversion(converters[typeof(CategoryId)])
+                    .ValueGeneratedOnAdd();
+                builder.Property(m => m.CategoryTypeId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.CategoryType)]);
+            });
+            modelBuilder.Entity<Shared.Models.CategoryType>(builder =>
+            {
+                builder.Property(m => m.CategoryTypeId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.CategoryType)])
+                    .ValueGeneratedOnAdd();
+            });
+            modelBuilder.Entity<Form>(builder =>
+            {
+                builder.Property(m => m.FormId)
+                    .HasConversion(converters[typeof(FormId)])
+                    .ValueGeneratedOnAdd();
+                builder.Property(m => m.GroupId)
+                    .HasConversion(converters[typeof(GroupId)]);
+            });
+            modelBuilder.Entity<Group>(builder =>
+            {
+                builder.Property(m => m.GroupId)
+                    .HasConversion(converters[typeof(GroupId)])
+                    .ValueGeneratedOnAdd();
+                builder.Property(m => m.GroupTypeId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.GroupType)]);
+                builder.Property(m => m.CategoryId)
+                    .HasConversion(converters[typeof(CategoryId)]);
+                builder.Property(m => m.OwnerId)
+                    .HasConversion(converters[typeof(UserId)]);
+                builder.Property(m => m.ChannelId)
+                    .HasConversion(converters[typeof(ChannelId)]);
+            });
+            modelBuilder.Entity<Shared.Models.GroupType>(builder =>
+            {
+                builder.Property(m => m.GroupTypeId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.GroupType)])
+                    .ValueGeneratedOnAdd();
+            });
+            modelBuilder.Entity<Question>(builder =>
+            {
+                builder.Property(m => m.QuestionId)
+                    .HasConversion(converters[typeof(QuestionId)])
+                    .ValueGeneratedOnAdd();
+                builder.Property(m => m.FormId)
+                    .HasConversion(converters[typeof(FormId)]);
+                builder.Property(m => m.AnswerTypeId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.AnswerType)]);
+            });
+            modelBuilder.Entity<Submission>(builder =>
+            {
+                builder.Property(m => m.SubmissionId)
+                    .HasConversion(converters[typeof(SubmissionId)])
+                    .ValueGeneratedOnAdd();
+                builder.Property(m => m.FormId)
+                    .HasConversion(converters[typeof(FormId)]);
+                builder.Property(m => m.ApplicantId)
+                    .HasConversion(converters[typeof(UserId)]);
+                builder.Property(m => m.SubmissionStatusId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.SubmissionStatus)]);
+                builder.Property(m => m.VisibilityLevelId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.VisibilityLevel)]);
+            });
+            modelBuilder.Entity<Shared.Models.SubmissionStatus>(builder =>
+            {
+                builder.Property(m => m.SubmissionStatusId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.SubmissionStatus)])
+                    .ValueGeneratedOnAdd();
+            });
+            modelBuilder.Entity<Tag>(builder =>
+            {
+                builder.Property(m => m.TagId)
+                    .HasConversion(converters[typeof(TagId)])
+                    .ValueGeneratedOnAdd();
+            });
+            modelBuilder.Entity<UserNotificationSettings>(builder =>
+            {
+                builder.Property(m => m.UserId)
+                    .HasConversion(converters[typeof(UserId)]);
+            });
+            modelBuilder.Entity<Shared.Models.VisibilityLevel>(builder =>
+            {
+                builder.Property(m => m.VisibilityLevelId)
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.VisibilityLevel)])
+                    .ValueGeneratedOnAdd();
+            });
+        }
 
         public async Task Transactional(Func<Task> act)
         {

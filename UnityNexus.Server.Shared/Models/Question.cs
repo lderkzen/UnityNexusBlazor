@@ -4,7 +4,7 @@ namespace UnityNexus.Server.Shared.Models
 {
     [Table("questions")]
     [Index(nameof(FormId), nameof(Position))]
-    public partial class Question
+    public partial class Question : ICreatableModel, IUpdatableModel, ISoftDeletableModel
     {
         public Question()
         {
@@ -46,5 +46,15 @@ namespace UnityNexus.Server.Shared.Models
         public virtual Form Form { get; set; } = null!;
         public virtual AnswerType AnswerType { get; set; } = null!;
         public virtual ICollection<Answer> Answers { get; set; }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

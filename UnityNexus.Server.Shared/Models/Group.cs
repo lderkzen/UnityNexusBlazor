@@ -4,7 +4,7 @@ namespace UnityNexus.Server.Shared.Models
 {
     [Table("groups")]
     [Index(nameof(Position))]
-    public abstract partial class Group : ISoftDeletableModel
+    public abstract partial class Group : ICreatableModel, IUpdatableModel, ISoftDeletableModel
     {
         public Group()
         {
@@ -68,5 +68,15 @@ namespace UnityNexus.Server.Shared.Models
         public virtual ICollection<UserId> MemberIds { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Form> Forms { get; set; }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

@@ -1,7 +1,7 @@
 namespace UnityNexus.Server.Shared.Models
 {
     [Table("answers")]
-    public partial class Answer : ISoftDeletableModel
+    public partial class Answer : ICreatableModel, IUpdatableModel, ISoftDeletableModel
     {
         public Answer()
         {
@@ -40,5 +40,15 @@ namespace UnityNexus.Server.Shared.Models
         public virtual Submission Submission { get; set; } = null!;
 
         public virtual Answer? PreviousAnswer { get; set; }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

@@ -57,43 +57,61 @@ namespace UnityNexus.Client.Pages
             _groups.Add(new GroupModel
             {
                 GroupId = GroupId.From(1),
-                CategoryId = CategoryId.From(1),
+                Category = new CategoryModel {
+                    CategoryId = CategoryId.From(1),
+                    Name = "Discord",
+                    GroupIds = [GroupId.From(1), GroupId.From(2)]
+                },
                 Name = "Member",
                 Intro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 Position = 0,
                 IsLocked = false,
-                Image = "/images/hou_logo_large.png"
+                LogoPath = "/images/hou_logo_large.png"
             });
             _groups.Add(new GroupModel
             {
                 GroupId = GroupId.From(2),
-                CategoryId = CategoryId.From(1),
+                Category = new CategoryModel
+                {
+                    CategoryId = CategoryId.From(1),
+                    Name = "Discord",
+                    GroupIds = [GroupId.From(1), GroupId.From(2)]
+                },
                 Name = "Social Member",
                 Intro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 Position = 1,
                 IsLocked = false,
-                Image = "/images/hou_logo_large.png"
+                LogoPath = "/images/hou_logo_large.png"
             });
             _groups.Add(new GroupModel
             {
                 GroupId = GroupId.From(3),
-                CategoryId = CategoryId.From(2),
+                Category = new CategoryModel
+                {
+                    CategoryId = CategoryId.From(2),
+                    Name = "Ashes of Creation",
+                    GroupIds = [GroupId.From(3), GroupId.From(4)]
+                },
                 Name = "Main guild: Hand of Unity",
                 Intro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                TagIds = [TagId.From(1), TagId.From(2)],
                 Position = 2,
                 IsLocked = false,
-                Image = "/images/hou_logo_large.png"
+                LogoPath = "/images/hou_logo_large.png"
             });
             _groups.Add(new GroupModel
             {
                 GroupId = GroupId.From(4),
-                CategoryId = CategoryId.From(2),
-                Name = "Social guild: Fellowship of Unity",
+                Category = new CategoryModel
+                {
+                    CategoryId = CategoryId.From(2),
+                    Name = "Ashes of Creation",
+                    GroupIds = [GroupId.From(3), GroupId.From(4)]
+                },
+                Name = "Social guild: Hand of Unity",
                 Intro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 Position = 3,
                 IsLocked = true,
-                Image = "/images/hou_logo_large.png"
+                LogoPath = "/images/hou_logo_large.png"
             });
 
 

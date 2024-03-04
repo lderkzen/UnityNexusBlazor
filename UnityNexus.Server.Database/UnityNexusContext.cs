@@ -22,6 +22,7 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.AddInterceptors([new CreateInterceptor(), new UpdateInterceptor(), new SoftDeleteInterceptor()]);
             base.OnConfiguring(optionsBuilder);
         }
 
