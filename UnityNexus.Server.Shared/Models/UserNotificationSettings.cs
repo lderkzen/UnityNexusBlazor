@@ -10,6 +10,9 @@ namespace UnityNexus.Server.Shared.Models
         }
 
         [Key]
+        [Column("user_notification_settings_id")]
+        public int UserNotificationSettingsId { get; set; }
+
         [Column("user_id")]
         public UserId UserId { get; set; }
 

@@ -4,12 +4,11 @@ namespace UnityNexus.Server.Shared.Models
 {
     [Table("groups")]
     [Index(nameof(Position))]
-    public abstract partial class Group : ICreatableModel, IUpdatableModel, ISoftDeletableModel
+    public partial class Group : ICreatableModel, IUpdatableModel, ISoftDeletableModel
     {
         public Group()
         {
             GroupId = GroupId.From(0);
-            ChannelId = ChannelId.From(string.Empty);
             Name = string.Empty;
             Intro = string.Empty;
 
@@ -32,7 +31,7 @@ namespace UnityNexus.Server.Shared.Models
         public UserId? OwnerId { get; set; }
 
         [Column("channel_id")]
-        public ChannelId ChannelId { get; set; }
+        public ChannelId? ChannelId { get; set; }
 
         [MaxLength(255)]
         [Column("name")]

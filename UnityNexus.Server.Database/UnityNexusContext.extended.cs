@@ -85,8 +85,7 @@
             modelBuilder.Entity<Shared.Models.AnswerType>(builder =>
             {
                 builder.Property(m => m.AnswerTypeId)
-                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.AnswerType)])
-                    .ValueGeneratedOnAdd();
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.AnswerType)]);
             });
             modelBuilder.Entity<Category>(builder =>
             {
@@ -99,8 +98,7 @@
             modelBuilder.Entity<Shared.Models.CategoryType>(builder =>
             {
                 builder.Property(m => m.CategoryTypeId)
-                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.CategoryType)])
-                    .ValueGeneratedOnAdd();
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.CategoryType)]);
             });
             modelBuilder.Entity<Form>(builder =>
             {
@@ -127,8 +125,7 @@
             modelBuilder.Entity<Shared.Models.GroupType>(builder =>
             {
                 builder.Property(m => m.GroupTypeId)
-                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.GroupType)])
-                    .ValueGeneratedOnAdd();
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.GroupType)]);
             });
             modelBuilder.Entity<Question>(builder =>
             {
@@ -157,8 +154,7 @@
             modelBuilder.Entity<Shared.Models.SubmissionStatus>(builder =>
             {
                 builder.Property(m => m.SubmissionStatusId)
-                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.SubmissionStatus)])
-                    .ValueGeneratedOnAdd();
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.SubmissionStatus)]);
             });
             modelBuilder.Entity<Tag>(builder =>
             {
@@ -174,8 +170,7 @@
             modelBuilder.Entity<Shared.Models.VisibilityLevel>(builder =>
             {
                 builder.Property(m => m.VisibilityLevelId)
-                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.VisibilityLevel)])
-                    .ValueGeneratedOnAdd();
+                    .HasConversion(converters[typeof(UnityNexus.Shared.Enums.VisibilityLevel)]);
             });
         }
 
