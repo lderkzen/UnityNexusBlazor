@@ -121,6 +121,15 @@
                     .HasConversion(converters[typeof(UserId)]);
                 builder.Property(m => m.ChannelId)
                     .HasConversion(converters[typeof(ChannelId)]);
+
+                builder.HasMany(m => m.Tags)
+                    .WithMany(m => m.Groups)
+                    .UsingEntity(
+                        "group_tag",
+                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("tag_id").HasPrincipalKey(nameof(Tag.TagId)),
+                        r => r.HasOne(typeof(Group)).WithMany().HasForeignKey("group_id").HasPrincipalKey(nameof(Group.GroupId)),
+                        j => j.HasKey("group_id", "tag_id")
+                    );
             });
             modelBuilder.Entity<Shared.Models.GroupType>(builder =>
             {

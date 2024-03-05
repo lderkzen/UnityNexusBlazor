@@ -25,12 +25,12 @@ namespace UnityNexus.Server.Stores
             _clientId = keycloakInstallationOptions.Resource;
         }
 
-        private static Guid? TryGetUserIdFromResponse(JsonElement userJson)
+        private static UserId? TryGetUserIdFromResponse(JsonElement userJson)
         {
-            if (!userJson.TryGetProperty("id", out var id))
+            if (!userJson.TryGetProperty("id", out JsonElement id))
                 return null;
 
-            return id.GetGuid();
+            return (UserId)id.GetGuid();
         }
 
         private static UserModel? CreateUserModel(
@@ -41,7 +41,7 @@ namespace UnityNexus.Server.Stores
         {
             JsonDocument usersDocument = JsonDocument.Parse(userJson);
 
-            Guid? id = TryGetUserIdFromResponse(usersDocument.RootElement);
+            UserId? id = TryGetUserIdFromResponse(usersDocument.RootElement);
             if (id is null)
                 return null;
 
@@ -80,7 +80,7 @@ namespace UnityNexus.Server.Stores
 
             return new UserModel
             {
-                Id = (Guid)id,
+                Id = id,
                 Username = username,
                 DiscordUserId = discordUserId,
                 AvatarId = avatarId,
@@ -108,7 +108,7 @@ namespace UnityNexus.Server.Stores
             return mappedRoles;
         }
 
-        public async Task<List<Guid>?> GetAllUserIdsAsync()
+        public async Task<List<UserId>?> GetAllUserIdsAsync()
         {
             HttpClient httpClient = _httpClientFactory.CreateClient("keycloak");
             await _keycloakAccessTokenManager.SetAccessTokenAsync(httpClient);
@@ -129,7 +129,6 @@ namespace UnityNexus.Server.Stores
                 .EnumerateArray()
                 .Select(TryGetUserIdFromResponse)
                 .Where(userId => userId is not null)
-                .Cast<Guid>()
                 .ToList()!;
         }
 

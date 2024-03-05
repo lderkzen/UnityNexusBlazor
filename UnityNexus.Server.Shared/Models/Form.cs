@@ -22,6 +22,9 @@ namespace UnityNexus.Server.Shared.Models
         [Column("topic")]
         public string Topic { get; set; }
 
+        [Column("is_application_form")]
+        public bool IsApplicationForm { get; set; }
+
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
 

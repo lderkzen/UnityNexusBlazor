@@ -6,7 +6,7 @@ namespace UnityNexus.Shared.Models
         private string? _avatarUrl;
         private IReadOnlyList<string> _roles;
 
-        public Guid Id { get; set; }
+        public UserId Id { get; set; }
 
         /// <summary>
         /// Gets or sets the user's Discord username, not unique across the platform.
@@ -84,6 +84,7 @@ namespace UnityNexus.Shared.Models
         /// </summary>
         public UserModel()
         {
+            Id = UserId.From(Guid.Empty);
             _username = string.Empty;
             _roles = [];
         }
