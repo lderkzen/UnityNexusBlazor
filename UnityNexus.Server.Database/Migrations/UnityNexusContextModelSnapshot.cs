@@ -22,21 +22,6 @@ namespace UnityNexus.Server.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GroupTag", b =>
-                {
-                    b.Property<int>("GroupsGroupId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TagsTagId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("GroupsGroupId", "TagsTagId");
-
-                    b.HasIndex("TagsTagId");
-
-                    b.ToTable("GroupTag");
-                });
-
             modelBuilder.Entity("UnityNexus.Server.Shared.Models.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
@@ -235,6 +220,10 @@ namespace UnityNexus.Server.Database.Migrations
                     b.Property<int?>("GroupId")
                         .HasColumnType("integer")
                         .HasColumnName("group_id");
+
+                    b.Property<bool>("IsApplicationForm")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_application_form");
 
                     b.Property<string>("Topic")
                         .IsRequired()
@@ -549,22 +538,15 @@ namespace UnityNexus.Server.Database.Migrations
 
             modelBuilder.Entity("UnityNexus.Server.Shared.Models.UserNotificationSettings", b =>
                 {
-                    b.Property<int>("UserNotificationSettingsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("user_notification_settings_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserNotificationSettingsId"));
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
 
                     b.Property<int>("NotificationFlagSum")
                         .HasColumnType("integer")
                         .HasColumnName("notification_flag_sum");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("UserNotificationSettingsId");
+                    b.HasKey("UserId");
 
                     b.ToTable("user_notification_settings");
                 });
@@ -609,19 +591,19 @@ namespace UnityNexus.Server.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GroupTag", b =>
+            modelBuilder.Entity("group_tag", b =>
                 {
-                    b.HasOne("UnityNexus.Server.Shared.Models.Group", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("group_id")
+                        .HasColumnType("integer");
 
-                    b.HasOne("UnityNexus.Server.Shared.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("tag_id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("group_id", "tag_id");
+
+                    b.HasIndex("tag_id");
+
+                    b.ToTable("group_tag");
                 });
 
             modelBuilder.Entity("UnityNexus.Server.Shared.Models.Answer", b =>
@@ -730,6 +712,21 @@ namespace UnityNexus.Server.Database.Migrations
                     b.Navigation("SubmissionStatus");
 
                     b.Navigation("VisibilityLevel");
+                });
+
+            modelBuilder.Entity("group_tag", b =>
+                {
+                    b.HasOne("UnityNexus.Server.Shared.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("group_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnityNexus.Server.Shared.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("tag_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("UnityNexus.Server.Shared.Models.AnswerType", b =>

@@ -83,14 +83,12 @@ namespace UnityNexus.Server.Database.Migrations
                 name: "user_notification_settings",
                 columns: table => new
                 {
-                    user_notification_settings_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     notification_flag_sum = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_notification_settings", x => x.user_notification_settings_id);
+                    table.PrimaryKey("PK_user_notification_settings", x => x.user_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,6 +168,7 @@ namespace UnityNexus.Server.Database.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     group_id = table.Column<int>(type: "integer", nullable: true),
                     topic = table.Column<string>(type: "text", nullable: false),
+                    is_application_form = table.Column<bool>(type: "boolean", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     deleted_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -185,24 +184,24 @@ namespace UnityNexus.Server.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroupTag",
+                name: "group_tag",
                 columns: table => new
                 {
-                    GroupsGroupId = table.Column<int>(type: "integer", nullable: false),
-                    TagsTagId = table.Column<int>(type: "integer", nullable: false)
+                    group_id = table.Column<int>(type: "integer", nullable: false),
+                    tag_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupTag", x => new { x.GroupsGroupId, x.TagsTagId });
+                    table.PrimaryKey("PK_group_tag", x => new { x.group_id, x.tag_id });
                     table.ForeignKey(
-                        name: "FK_GroupTag_groups_GroupsGroupId",
-                        column: x => x.GroupsGroupId,
+                        name: "FK_group_tag_groups_group_id",
+                        column: x => x.group_id,
                         principalTable: "groups",
                         principalColumn: "group_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GroupTag_tags_TagsTagId",
-                        column: x => x.TagsTagId,
+                        name: "FK_group_tag_tags_tag_id",
+                        column: x => x.tag_id,
                         principalTable: "tags",
                         principalColumn: "tag_id",
                         onDelete: ReferentialAction.Cascade);
@@ -396,6 +395,11 @@ namespace UnityNexus.Server.Database.Migrations
                 column: "group_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_group_tag_tag_id",
+                table: "group_tag",
+                column: "tag_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_groups_category_id",
                 table: "groups",
                 column: "category_id");
@@ -409,11 +413,6 @@ namespace UnityNexus.Server.Database.Migrations
                 name: "IX_groups_position",
                 table: "groups",
                 column: "position");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GroupTag_TagsTagId",
-                table: "GroupTag",
-                column: "TagsTagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_questions_answer_type_id",
@@ -453,7 +452,7 @@ namespace UnityNexus.Server.Database.Migrations
                 name: "answers");
 
             migrationBuilder.DropTable(
-                name: "GroupTag");
+                name: "group_tag");
 
             migrationBuilder.DropTable(
                 name: "user_notification_settings");

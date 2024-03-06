@@ -30,6 +30,11 @@ namespace UnityNexus.Server.Shared
             _unityNexusContext.Tags.Add(tag);
         }
 
+        public Task<(Dictionary<string, (string OldValue, string newValue)>? Changes, Exception? Exception)> UpdateTagAsync(Tag dbEntity, Tag requestEntity)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Exception?> DeleteTagAsync(Tag tag)
         {
             try {
