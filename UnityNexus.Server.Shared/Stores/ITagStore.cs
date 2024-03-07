@@ -7,7 +7,7 @@ namespace UnityNexus.Server.Shared.Stores
         public Task<bool> IsUsedAsync(TagId tagId);
 
         public void CreateTag(Tag tag);
-        public Task<(Dictionary<string, (string OldValue, string newValue)>? Changes, Exception? Exception)> UpdateTagAsync(
+        public Task<(Dictionary<string, (string OldValue, string NewValue)>? Changes, Exception? Exception)> UpdateTagAsync(
             Tag dbEntity,
             Tag requestEntity
         );

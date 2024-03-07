@@ -38,6 +38,8 @@ namespace UnityNexus.Shared.Models
         
         public string? NotificationChannelId { get; set; }
 
+        public string RoleId { get; set; }
+
         public bool IsLocked { get; set; }
 
         public byte Position { get; set; }
@@ -58,6 +60,7 @@ namespace UnityNexus.Shared.Models
         {
             GroupId = GroupId.From(0);
             GroupType = new GroupTypeModel();
+            RoleId = string.Empty;
             _name = string.Empty;
             _intro = string.Empty;
             _tagIds = [];
@@ -76,6 +79,7 @@ namespace UnityNexus.Shared.Models
             TagIds = other.TagIds;
             Category = other.Category;
             NotificationChannelId = other.NotificationChannelId;
+            RoleId = other.RoleId;
             IsLocked = other.IsLocked;
             Position = other.Position;
             LogoPath = other.LogoPath;

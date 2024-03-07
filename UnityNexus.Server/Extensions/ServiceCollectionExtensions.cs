@@ -58,6 +58,8 @@ namespace UnityNexus.Server.Extensions
 
         internal static IServiceCollection AddStores(this IServiceCollection services)
         {
+            services.AddScoped<ICategoryStore, CategoryStore>();
+            services.AddScoped<IGroupStore, GroupStore>();
             services.AddScoped<ITagStore, TagStore>();
 
             return services;

@@ -1,5 +1,3 @@
-using UnityNexus.Server.Shared.Models;
-
 namespace UnityNexus.Server.Shared
 {
     public class TagStore : ITagStore
@@ -22,7 +20,7 @@ namespace UnityNexus.Server.Shared
         }
 
         public async Task<bool> IsUsedAsync(TagId tagId) =>
-            ((await _unityNexusContext.Tags.FirstOrDefaultAsync(t => t.TagId == tagId))?.Groups.Count ?? 0) > 0;
+            ((await _unityNexusContext.Tags.FirstOrDefaultAsync(m => m.TagId == tagId))?.Groups.Count ?? 0) > 0;
 
         public void CreateTag(Tag tag)
         {
@@ -30,7 +28,7 @@ namespace UnityNexus.Server.Shared
             _unityNexusContext.Tags.Add(tag);
         }
 
-        public Task<(Dictionary<string, (string OldValue, string newValue)>? Changes, Exception? Exception)> UpdateTagAsync(Tag dbEntity, Tag requestEntity)
+        public Task<(Dictionary<string, (string OldValue, string NewValue)>? Changes, Exception? Exception)> UpdateTagAsync(Tag dbEntity, Tag requestEntity)
         {
             throw new NotImplementedException();
         }

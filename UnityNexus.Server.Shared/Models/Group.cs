@@ -9,6 +9,7 @@ namespace UnityNexus.Server.Shared.Models
         public Group()
         {
             GroupId = GroupId.From(0);
+            RoleId = RoleId.Unspecified;
             Name = string.Empty;
             Intro = string.Empty;
 
@@ -32,6 +33,9 @@ namespace UnityNexus.Server.Shared.Models
 
         [Column("channel_id")]
         public ChannelId? ChannelId { get; set; }
+
+        [Column("role_id")]
+        public RoleId RoleId { get; set; }
 
         [MaxLength(255)]
         [Column("name")]
