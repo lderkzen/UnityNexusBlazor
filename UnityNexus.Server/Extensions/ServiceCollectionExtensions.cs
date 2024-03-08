@@ -1,4 +1,3 @@
-using UnityNexus.Server.Shared;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 namespace UnityNexus.Server.Extensions
@@ -56,12 +55,53 @@ namespace UnityNexus.Server.Extensions
             return services;
         }
 
+        internal static IServiceCollection AddDiagnostics(
+            this IServiceCollection services,
+            IConfiguration configuration
+        )
+        {
+            string connectionString = configuration.GetDynamicConnectionString("Application");
+
+            services.AddHealthChecks()
+                .AddNpgSql(
+                    connectionString,
+                    "SELECT 1;",
+                    null,
+                    HealthCheckedServices.PostgresDatabase,
+                    HealthStatus.Unhealthy,
+                    ["db", "sql", "pgsql", "postgres", "postgresql"]
+                )
+                .AddDbContextCheck<UnityNexusContext>(
+                    HealthCheckedServices.EntityFrameworkAccess,
+                    HealthStatus.Unhealthy,
+                    ["db", "ef", "ef-core"],
+                    async (context, token) => await context.ConfigurationEntries.AnyAsync(token)
+                );
+
+            return services;
+        }
+
+        internal static IServiceCollection AddCookiePolicy(this IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+            });
+
+            return services;
+        }
+
         internal static IServiceCollection AddStores(this IServiceCollection services)
         {
             services.AddScoped<ICategoryStore, CategoryStore>();
             services.AddScoped<IGroupStore, GroupStore>();
             services.AddScoped<ITagStore, TagStore>();
 
+            return services;
+        }
+
+        internal static IServiceCollection AddBusinessLogicLayer(this IServiceCollection services)
+        {
             return services;
         }
     }

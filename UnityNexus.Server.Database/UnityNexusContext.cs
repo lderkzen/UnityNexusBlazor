@@ -4,6 +4,7 @@
     {
         public DbSet<Answer> Answers { get; set; } = null!;
         public DbSet<Shared.Models.AnswerType> AnswerTypes { get; set; } = null!;
+        public DbSet<ConfigurationEntry> ConfigurationEntries { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Shared.Models.CategoryType> CategoryTypes { get; set; } = null!;
         public DbSet<Form> Forms { get; set; } = null!;

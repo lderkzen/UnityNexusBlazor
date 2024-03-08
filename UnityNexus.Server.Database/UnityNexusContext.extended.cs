@@ -46,6 +46,7 @@
             new Dictionary<Type, ValueConverter>
             {
                 { typeof(AnswerId), new AnswerId.EfCoreValueConverter() },
+                { typeof(ConfigurationEntryId), new ConfigurationEntryId.EfCoreValueConverter() },
                 { typeof(CategoryId), new CategoryId.EfCoreValueConverter() },
                 { typeof(ChannelId), new ChannelId.EfCoreValueConverter() },
                 { typeof(FormId), new FormId.EfCoreValueConverter() },
@@ -86,6 +87,11 @@
             {
                 builder.Property(m => m.AnswerTypeId)
                     .HasConversion(converters[typeof(UnityNexus.Shared.Enums.AnswerType)]);
+            });
+            modelBuilder.Entity<ConfigurationEntry>(builder =>
+            {
+                builder.Property(m => m.ConfigurationEntryId)
+                    .HasConversion(converters[typeof(ConfigurationEntryId)]);
             });
             modelBuilder.Entity<Category>(builder =>
             {

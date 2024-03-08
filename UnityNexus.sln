@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Server.Shared", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Server.Database", "UnityNexus.Server.Database\UnityNexus.Server.Database.csproj", "{BB6CCB2B-0DD2-4968-8591-8842C17B8565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityNexus.Server.Queries", "UnityNexus.Server.Queries\UnityNexus.Server.Queries.csproj", "{16DB5B7E-9ED8-4957-97E9-55D3C4B0B75E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BB6CCB2B-0DD2-4968-8591-8842C17B8565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB6CCB2B-0DD2-4968-8591-8842C17B8565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB6CCB2B-0DD2-4968-8591-8842C17B8565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16DB5B7E-9ED8-4957-97E9-55D3C4B0B75E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DB5B7E-9ED8-4957-97E9-55D3C4B0B75E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DB5B7E-9ED8-4957-97E9-55D3C4B0B75E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DB5B7E-9ED8-4957-97E9-55D3C4B0B75E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

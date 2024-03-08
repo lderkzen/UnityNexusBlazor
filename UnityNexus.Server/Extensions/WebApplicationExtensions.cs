@@ -4,6 +4,10 @@
     {
         private static void ConfigureEndpoints(IEndpointRouteBuilder endpoints)
         {
+            endpoints.MapHealthChecks("/health", new HealthCheckOptions
+            {
+                AllowCachingResponses = true
+            });
             endpoints.MapDefaultControllerRoute();
         }
 
@@ -22,7 +26,7 @@
                 app.UseHsts();
             }
 
-            // app.UseSecurityHeaders(collection => collection.Configure(app.Environment.IsDevelopment()));
+            app.UseSecurityHeaders(collection => collection.Configure(app.Environment.IsDevelopment()));
 
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
@@ -40,6 +44,10 @@
             }
 
             app.UseRouting();
+
+            app.UseCookiePolicy();
+            app.UseCors();
+            app.UseEndpoints(ConfigureEndpoints);
 
             return app;
         }

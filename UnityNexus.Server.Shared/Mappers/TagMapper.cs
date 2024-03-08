@@ -1,5 +1,3 @@
-using UnityNexus.Server.Shared.Models;
-
 namespace UnityNexus.Server.Shared.Mappers
 {
     [Mapper]

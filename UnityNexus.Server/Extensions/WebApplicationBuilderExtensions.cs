@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using UnityNexus.Shared.Enums;
-
 namespace UnityNexus.Server.Extensions
 {
     internal static class WebApplicationBuilderExtensions
@@ -46,9 +43,12 @@ namespace UnityNexus.Server.Extensions
             builder.Configuration.AddConfiguration(configuration);
 
             builder.Services
+                .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped)
                 .AddUnityNexusContext()
+                .AddDiagnostics(configuration)
                 .AddCookiePolicy()
                 .AddStores()
+                .AddBusinessLogicLayer()
                 .AddHttpClient(
                     "keycloak",
                     (provider, client) =>
@@ -60,16 +60,6 @@ namespace UnityNexus.Server.Extensions
                 );
 
             return builder;
-        }
-
-        internal static IServiceCollection AddCookiePolicy(this IServiceCollection services)
-        {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.MinimumSameSitePolicy = SameSiteMode.Lax;
-            });
-
-            return services;
         }
     }
 }

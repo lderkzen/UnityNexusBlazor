@@ -12,8 +12,8 @@ namespace UnityNexus.Server.Shared.Stores
         public Task<UserModel> GetAllMembersByGroupIdAsync(GroupId groupId);
         public Task<int> CountMembersAsync(Group group);
         public Task<UserModel> GetAllMembersAsync(Group group);
-        public Task<bool> RegisterMembersAsync(Group group, params UserId[] userIds);
-        public Task<bool> RemoveMembersAsync(Group group, params UserId[] userIds);
+        public Task<bool> RegisterMemberAsync(Group group, UserId userId);
+        public Task<bool> RemoveMemberAsync(Group group, UserId userId);
 
         public void CreateGroup(Group group);
         public Task<(Dictionary<string, (string OldValue, string newValue)>? Changes, Exception? Exception)> UpdateGroupAsync(
@@ -22,6 +22,6 @@ namespace UnityNexus.Server.Shared.Stores
         );
         public Task<Exception?> DeleteGroupAsync(Group group);
         public Task<Exception?> DestroyDeletedGroupAsync(Group group);
-        public Task<Exception?> SavechangesAsync();
+        public Task<Exception?> SaveChangesAsync();
     }
 }

@@ -63,5 +63,78 @@ namespace UnityNexus.Server.Stores
         {
             throw new NotImplementedException();
         }
+
+        public async Task<UserModel> GetAllMembersByGroupIdAsync(GroupId groupId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> CountMembersAsync(Group group)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<UserModel> GetAllMembersAsync(Group group)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> RegisterMemberAsync(Group group, UserId userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> RemoveMemberAsync(Group group, UserId userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateGroup(Group group)
+        {
+            group.GroupId = null!;
+            _unityNexusContext.Groups.Add(group);
+        }
+
+        public async Task<(Dictionary<string, (string OldValue, string newValue)>? Changes, Exception? Exception)> UpdateGroupAsync(
+            Group dbEntity,
+            Group requestEntity
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Exception?> DeleteGroupAsync(Group group)
+        {
+            try
+            {
+                _unityNexusContext.Groups.Remove(group);
+                await _unityNexusContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+
+            return null;
+        }
+
+        public async Task<Exception?> DestroyDeletedGroupAsync(Group group)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Exception?> SaveChangesAsync()
+        {
+            try
+            {
+                await _unityNexusContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+
+            return null;
+        }
     }
 }
