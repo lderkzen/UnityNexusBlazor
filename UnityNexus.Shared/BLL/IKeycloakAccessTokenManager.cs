@@ -1,4 +1,4 @@
-namespace UnityNexus.Shared.Auth
+namespace UnityNexus.Shared.BLL
 {
     public interface IKeycloakAccessTokenManager
     {

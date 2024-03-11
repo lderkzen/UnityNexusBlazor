@@ -1,5 +1,6 @@
 global using System.ComponentModel.DataAnnotations;
 global using System.ComponentModel.DataAnnotations.Schema;
+global using System.Security.Claims;
 global using Riok.Mapperly.Abstractions;
 global using UnityNexus.Shared.Enums;
 global using UnityNexus.Shared.Models;

@@ -9,11 +9,16 @@ namespace UnityNexus.Server
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveWebAssemblyComponents();
-            builder = builder.ConfigureServices(Configuration.Load());
 
             Client.Program.AddCommonServices(builder.Services, builder.Configuration);
+            ConfigureServices(builder, Configuration.Load());
 
+            // WebApplication app = builder.Build().ConfigureRequestPipeline();
             WebApplication app = builder.Build();
+
+            app.MapRazorComponents<App>()
+                .AddInteractiveWebAssemblyRenderMode()
+                .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -32,11 +37,35 @@ namespace UnityNexus.Server
             app.UseStaticFiles();
             app.UseAntiforgery();
 
-            app.MapRazorComponents<App>()
-                .AddInteractiveWebAssemblyRenderMode()
-                .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
-
             app.Run();
+        }
+
+        internal static void ConfigureServices(
+            WebApplicationBuilder builder,
+            IConfiguration configuration
+        )
+        {
+            builder.Configuration.AddConfiguration(configuration);
+
+            builder.Services
+                // .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped)
+                .AddUnityNexusContext()
+                // .AddDiagnostics(configuration)
+                .AddCookiePolicy()
+                .AddAppConfiguration()
+                // .AddAuthentication(configuration)
+                // .AddAuthorizationCore(options => options.AddSharedPolicies(typeof(Policies)))
+                .AddStores()
+                // .AddBusinessLogicLayer()
+                .AddHttpClient(
+                    "keycloak",
+                    (provider, client) =>
+                    {
+                        JwtBearerOptions? jwtBearerOptions = provider.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>()
+                            .Get(JwtBearerDefaults.AuthenticationScheme);
+                        client.BaseAddress = new Uri(jwtBearerOptions.Authority!);
+                    }
+                );
         }
     }
 }

@@ -11,7 +11,7 @@
             endpoints.MapDefaultControllerRoute();
         }
 
-        private static WebApplication ConfigureRequestPipeline(this WebApplication app)
+        internal static WebApplication ConfigureRequestPipeline(this WebApplication app)
         {
             if (app.Environment.IsDevelopment())
             {
@@ -47,6 +47,9 @@
 
             app.UseCookiePolicy();
             app.UseCors();
+            // app.UseAuthentication();
+            // app.UseAuthorization();
+
             app.UseEndpoints(ConfigureEndpoints);
 
             return app;

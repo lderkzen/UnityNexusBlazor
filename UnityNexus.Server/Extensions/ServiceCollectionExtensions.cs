@@ -81,6 +81,44 @@ namespace UnityNexus.Server.Extensions
             return services;
         }
 
+        internal static IServiceCollection AddAuthentication(
+            this IServiceCollection services,
+            IConfiguration configuration
+        )
+        {
+            KeycloakAuthenticationOptions options = new();
+            configuration
+                .GetSection(KeycloakAuthenticationOptions.Section)
+                .Bind(options, opt => opt.BindNonPublicProperties = true);
+
+            services.AddSingleton<KeycloakInstallationOptions>(options);
+            services.AddKeycloakAuthentication(
+                options,
+                bearerOptions =>
+                {
+                    bearerOptions.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            StringValues accessToken = context.Request.Query["access_token"];
+                            PathString path = context.HttpContext.Request.Path;
+                            if (
+                                !string.IsNullOrEmpty(accessToken) &&
+                                (path.StartsWithSegments("/user-hub") || path.StartsWithSegments("/bot-hub"))
+                            )
+                            {
+                                context.Token = accessToken;
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
+
+            return services;
+        }
+
         internal static IServiceCollection AddCookiePolicy(this IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -102,6 +140,9 @@ namespace UnityNexus.Server.Extensions
 
         internal static IServiceCollection AddBusinessLogicLayer(this IServiceCollection services)
         {
+
+            services.AddSingleton<IClaimsPrincipalHandler, ClaimsPrincipalHandler>();
+            services.AddSingleton<IKeycloakAccessTokenManager, KeycloakAccessTokenManager>();
             return services;
         }
     }

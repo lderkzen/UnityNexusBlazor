@@ -1,6 +1,6 @@
 namespace UnityNexus.Shared.Auth
 {
-    public static class AuthorizationOptionsExtensions
+    public static class AuthorizationOptionsExtension
     {
         public static void AddSharedPolicies(
             this AuthorizationOptions options,

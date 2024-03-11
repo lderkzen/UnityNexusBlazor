@@ -34,32 +34,5 @@ namespace UnityNexus.Server.Extensions
                     TryAddError(mseChild);
             }
         }
-
-        internal static WebApplicationBuilder ConfigureServices(
-            this WebApplicationBuilder builder,
-            IConfiguration configuration
-        )
-        {
-            builder.Configuration.AddConfiguration(configuration);
-
-            builder.Services
-                .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped)
-                .AddUnityNexusContext()
-                .AddDiagnostics(configuration)
-                .AddCookiePolicy()
-                .AddStores()
-                .AddBusinessLogicLayer()
-                .AddHttpClient(
-                    "keycloak",
-                    (provider, client) =>
-                    {
-                        JwtBearerOptions? jwtBearerOptions = provider.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>()
-                            .Get(JwtBearerDefaults.AuthenticationScheme);
-                        client.BaseAddress = new Uri(jwtBearerOptions.Authority!);
-                    }
-                );
-
-            return builder;
-        }
     }
 }
