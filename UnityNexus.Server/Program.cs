@@ -13,29 +13,11 @@ namespace UnityNexus.Server
             Client.Program.AddCommonServices(builder.Services, builder.Configuration);
             ConfigureServices(builder, Configuration.Load());
 
-            // WebApplication app = builder.Build().ConfigureRequestPipeline();
-            WebApplication app = builder.Build();
+            WebApplication app = builder.Build().ConfigureRequestPipeline();
 
             app.MapRazorComponents<App>()
                 .AddInteractiveWebAssemblyRenderMode()
                 .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseWebAssemblyDebugging();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseStaticFiles();
-            app.UseAntiforgery();
 
             app.Run();
         }
@@ -47,16 +29,17 @@ namespace UnityNexus.Server
         {
             builder.Configuration.AddConfiguration(configuration);
 
+            builder.Services.AddControllers();
             builder.Services
-                // .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped)
+                .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped)
                 .AddUnityNexusContext()
-                // .AddDiagnostics(configuration)
+                .AddDiagnostics(configuration)
                 .AddCookiePolicy()
                 .AddAppConfiguration()
-                // .AddAuthentication(configuration)
-                // .AddAuthorizationCore(options => options.AddSharedPolicies(typeof(Policies)))
+                .AddAuthentication(configuration)
+                .AddAuthorization(options => options.AddSharedPolicies(typeof(Policies)))
                 .AddStores()
-                // .AddBusinessLogicLayer()
+                .AddBusinessLogicLayer()
                 .AddHttpClient(
                     "keycloak",
                     (provider, client) =>

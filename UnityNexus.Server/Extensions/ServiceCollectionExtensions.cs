@@ -60,7 +60,14 @@ namespace UnityNexus.Server.Extensions
             IConfiguration configuration
         )
         {
-            string connectionString = configuration.GetDynamicConnectionString("Application");
+            string connectionString = string.Format(
+                "Server={0};Port={1};User ID={2};Password={3};Database={4}",
+                DotEnv.Generated.DatabaseEnvironment.UnityNexusDbHost,
+                DotEnv.Generated.DatabaseEnvironment.UnityNexusDbPort,
+                DotEnv.Generated.DatabaseEnvironment.UnityNexusDbUsername,
+                DotEnv.Generated.DatabaseEnvironment.UnityNexusDbPassword,
+                DotEnv.Generated.DatabaseEnvironment.UnityNexusDbName
+            );
 
             services.AddHealthChecks()
                 .AddNpgSql(

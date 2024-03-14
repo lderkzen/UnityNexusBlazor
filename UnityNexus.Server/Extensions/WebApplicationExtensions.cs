@@ -47,8 +47,8 @@
 
             app.UseCookiePolicy();
             app.UseCors();
-            // app.UseAuthentication();
-            // app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(ConfigureEndpoints);
 
