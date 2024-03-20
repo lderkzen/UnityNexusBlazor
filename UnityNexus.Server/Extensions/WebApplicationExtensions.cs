@@ -46,6 +46,7 @@
             app.UseRouting();
 
             app.UseCookiePolicy();
+            app.UseAntiforgery();
             app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();

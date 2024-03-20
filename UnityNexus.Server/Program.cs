@@ -28,6 +28,7 @@ namespace UnityNexus.Server
         )
         {
             builder.Configuration.AddConfiguration(configuration);
+            builder.Host.ConfigureKeycloakConfigurationSource();
 
             builder.Services.AddControllers();
             builder.Services

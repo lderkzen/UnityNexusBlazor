@@ -100,7 +100,7 @@ namespace UnityNexus.Server.Extensions
 
             services.AddSingleton<KeycloakInstallationOptions>(options);
             services.AddKeycloakAuthentication(
-                options,
+                configuration,
                 bearerOptions =>
                 {
                     bearerOptions.Events = new JwtBearerEvents

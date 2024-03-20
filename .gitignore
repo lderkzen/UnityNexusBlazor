@@ -405,3 +405,4 @@ UnityNexus.Shared/Generated/*
 
 # Ignore local config
 .config/*
+.mono/*
